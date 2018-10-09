@@ -1,0 +1,349 @@
+		body {
+            font-family: 'Roboto', sans-serif;
+			width: 90%;
+			min-width: 1000px;
+			margin: 0 auto;
+        }
+		
+        .container{
+            margin-top: 20px;
+        }
+		.center {
+			width: 70%;
+			  margin: 0 auto;
+		}
+		.header {
+			width:100%;
+		}
+		
+        .titleText {
+			
+            font-size: 600%;
+            font-weight: 100;
+            text-align: center;
+/*            color: #b30000;*/
+/*            color: #ff0000;*/
+            background: -webkit-linear-gradient(#b30000, #444444);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .subText {
+            font-size: 175%;
+            font-weight: 100;
+            text-align:center;
+        }
+        
+        .rule {
+            height: 5px;
+            background-color: #b30000;
+/*            background-color: #ff0000;*/
+            border-radius: 50px;
+        }
+		
+		
+		#navbarSPD {
+			color: #b30000; 
+		}
+        #about, a{
+            color: #b30000;
+        }
+		#spdDiv {
+			position: abosulte; 
+			top: 0px;
+			left:0px;
+		}
+        #requirementsList {
+            font-size: 135%;
+            
+        }
+		/***************************** imgPlayer css ***************************/
+/*
+		#slideShowImages { 
+			position: relative;
+			overflow: hidden; 
+			top:-30px;
+			border: 1px gray solid;
+			background-color: lightgray;
+			height: 400px; 
+			width: 700px;
+			margin: 0 auto;
+		}   
+  
+		#slideShowImages img { 
+			//border: 0.2em black solid;
+			//padding: 3px;
+			height: 400px; 
+			width: 700px;
+			
+		}
+
+        #slideShow {
+            text-align: center;
+            margin: 0 auto;
+            position: relative;
+            border: 1.5px black solid;
+            border-radius: 4px;
+        }
+
+        .slideItem img {
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .slideNumber {
+            color: #f2f2f2;
+            font-size: 1em;
+            padding: 8px 12px;
+            position: absolute;
+            top: 0;
+        }
+
+        .fadeImg {
+            -webkit-animation-name: fadeImg;
+            -webkit-animation-duration: 2.5s;
+            animation-name: fadeImg;
+            animation-duration: 2.5s;
+        }
+
+        @-webkit-keyframes fadeImg {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+
+        @-webkit-keyframes fadeImg {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+*/
+
+        /* Slideshow container */
+        .slideshow-container {
+          max-width: 700px;
+          max-height: 400px;
+          position: relative;
+          margin: auto;
+        }
+
+        /* Hide the images by default */
+        .slides {
+            display: none;
+        }
+
+        .slides img {
+            width: 100%;
+            max-width: 700px;
+            max-height: 400px;
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+          cursor: pointer;
+          position: absolute;
+          top: 50%;
+          width: auto;
+          margin-top: -22px;
+          padding: 16px;
+          color: white;
+          font-weight: bold;
+          font-size: 18px;
+          transition: 0.6s ease;
+          border-radius: 0 3px 3px 0;
+        }
+
+        .prev:hover, .prev:link, .prev:visited, .prev:active, .next:hover, .next:link, .next:visited, .next:active {
+            text-decoration: none;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+          right: 0;
+          border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+          background-color: rgba(0,0,0,0.8);
+          color: #b30000;
+        }
+
+        /* Caption text */
+        .slideshowCaptionText {
+          color: #f2f2f2;
+          background-color: rgba(63, 63, 63, 0.75);
+          font-size: 15px;
+          padding: 8px 12px;
+          position: absolute;
+          bottom: 8px;
+          width: 100%;
+          text-align: center;
+        }
+
+        /* Number text (1/3 etc) */
+        .slideshowNumberText {
+          color: #f2f2f2;
+          font-size: 12px;
+          padding: 8px 12px;
+          position: absolute;
+          top: 0;
+        }
+
+        /* The dots/bullets/indicators */
+        .slideshowDot {
+          cursor: pointer;
+          height: 15px;
+          width: 15px;
+          margin: 0 2px;
+          background-color: #bbb;
+          border-radius: 50%;
+          display: inline-block;
+          transition: background-color 0.6s ease;
+        }
+
+        .dotActive, .slideshowDot:hover {
+          background-color: #717171;
+        }
+
+        /* Fading animation */
+        .fadeOut {
+          -webkit-animation-name: fadeOut;
+          -webkit-animation-duration: 1.5s;
+          animation-name: fadeOut;
+          animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fadeOut {
+          from {opacity: .4} 
+          to {opacity: 1}
+        }
+
+        @keyframes fadeOut {
+          from {opacity: .4} 
+          to {opacity: 1}
+        }
+        
+		/********************** members css ***************************/
+		#bolder {
+			font-weight: bold;
+		}
+		#membersTable {
+			height: 500px; 
+			overflow: auto; 
+		}
+        #alumniTable {
+            height: 500px; 
+			overflow: auto;
+        }
+        table.floatThead-table {
+            border-top: none;
+            border-bottom: none;
+            background-color: #eee;
+        }
+		/********************** Footer css ***************************/
+		#footerWrapper {
+			width: 100%;
+		}
+		#innerFooterWrapper {
+			width: 97%;
+			margin: 0 auto;
+			display: flex; 
+			border-radius: 15px 15px 0px 0px;
+			flex-flow: row wrap;
+/*			background-color: #ff0000;*/
+            background-color: #b30000;
+		}
+		#collumn1 {
+			padding-top: 20px; 
+			flex: 20%; 
+			box-sizing: border-box; 
+		}
+		#collumn2 {
+			padding-top: 40px;  
+			flex: 15%; 
+			box-sizing: border-box; 
+			text-align: center; 
+			font-size: 1.0em; 
+			color: white; 
+		}
+		#footerText {
+			color: white; 
+			font-size: 1.4em;
+			background-color: #b30000; 
+			text-align: center;
+			width: 97%;
+			margin: 0 auto;
+		}
+		/********************** Sidebar css ***************************/
+		
+		@font-face {
+			font-family: entypo;
+			src: utl("http://weloveiconfonts.com/api/?family=entypo");
+		}
+		/* entypo */
+		[class*="entypo-"]:before {
+			font-family: "entypo", sans-serif;
+		}
+		li a { 
+			text-decoration: none;
+		}
+		ul {
+			list-style: none;
+			margin: 0;
+			padding: 0;
+		}
+		.orgsync {
+			background-image: url("images/orgsync.jpeg");
+			height: 36px;
+		}
+		.nationals {
+			background-image: url("images/favicon.png");
+			background-color: red;
+
+		}
+		.nationals img {
+			height: 35px;
+			width: 35px;
+		}
+		#sticky-social {
+			left: 0;
+			position: fixed;
+			top: 150px;
+			z-index: 10;
+		}
+		#sticky-social a {
+			background: #333;
+			color: #fff;
+			display: block;
+			height: 35px;
+			font: 16px "Open Sans", sans-serif;
+			line-height: 35px;
+			position: relative;
+			text-align: center;
+			width: 35px;
+		}
+		#sticky-social a span {
+			line-height: 35px;
+			left: -120px;
+			position: absolute;
+			text-align:center;
+			width:120px;
+		}
+		
+		#sticky-social a:hover span {
+			left: 100%;
+		}
+		
+		#sticky-social a[class*="facebook"],
+		#sticky-social a[class*="facebook"]:hover,
+		#sticky-social a[class*="facebook"] span { background: #3b5998; }
+
+		#sticky-social a[class*="twitter"],
+		#sticky-social a[class*="twitter"]:hover,
+		#sticky-social a[class*="twitter"] span { background: #00aced; }
+		
+		#sticky-social a[class*="orgsync"],
+		#sticky-social a[class*="orgsync"]:hover,
+		#sticky-social a[class*="orgsync"] span { background: #99cc00; } 		
+		
+		#sticky-social a[class*="nationals"],
+		#sticky-social a[class*="nationals"]:hover,
+		#sticky-social a[class*="nationals"] span { background: #000; } 
