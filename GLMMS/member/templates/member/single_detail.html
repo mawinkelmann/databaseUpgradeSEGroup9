@@ -1,0 +1,24 @@
+<h1>{{ profile.user.first_name }} {{profile.user.last_name }}</h1>
+{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+
+<table>
+{% for name, value in profile.get_printatble_fields %}
+	<thead>
+		<th>{{ name }}</th>
+	</thead>
+{% endfor %}
+	<tr>
+{% for name, value in profile.get_printatble_fields %}
+	{% if value %}
+		<td>{{ value }}</td>
+	{% endif %}
+{% endfor %}
+	</tr>
+</table>
+ <!--
+<ul>
+{% for choice in quesiton.choice_set.all %}
+	<li>{{ choice.choice_text }}<li>
+{% endfor %}
+</ul>
+-->

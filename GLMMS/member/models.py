@@ -66,7 +66,7 @@ class Organization_Involvement(models.Model):
 	position = models.CharField(max_length=63)
 
 def gen_file_path(instance, filename):
-	return 'images/profile_pics/{0}_{1}'.format(instance.user.username, filename)
+	return 'static/images/profile_pics/{0}_{1}'.format(instance.user.username, filename)
 
 #models are given an id pk field automatically 
 #doc for user model here https://docs.djangoproject.com/en/2.1/ref/contrib/auth/
@@ -104,6 +104,14 @@ class Profile(models.Model):
 	positions = models.ManyToManyField(Position, through='Position_History')
 	organizations = models.ManyToManyField(Organization, through='Organization_Involvement')
 	jobs = models.ManyToManyField(Company, through='Job_History')
+	
+	def __str__(self):
+		return self.user.username
+		
+	
+	def get_printable_fields(self):
+		fields = Profile._meta.fields
+		return [(field.name, field.value_to_string(self)) for field in Profile._meta.fields]
 	
 	
 @receiver(post_save, sender=User)
