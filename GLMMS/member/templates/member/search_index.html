@@ -1,14 +1,17 @@
-{% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+{% extends "common/base.html" %}
+{# {% block title %} Member Search {% endblock %} #}
 
-{% if latest_question_list %}
+{% block content %}
+
+<h1>Member Information Search Index</h1>
+<hr>
+<h4>Choose the type of search to perform</h4>
 <ul>
-{% for question in latest_question_list %}
-	<!--<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
-	<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-{% endfor %}
+	<li><a href="{% url 'member:single_search'%}">Single Member Search</a></li>
+	<li><a href="{% url 'member:mult_search'%}">Multi Member Search</a></li>
+	<li><a href="{% url 'member:job_search'%}">Job Search</a></li>
+	<li><a href="{% url 'member:position_search'%}">Position Search</a></li>
+	<li><a href="{% url 'member:organization_search'%}">Organization Search</a></li>
 </ul>
 
-{% else %}
-	<p>No polls are available. </p>
-{% endif %}
+{% endblock %}
