@@ -11,7 +11,7 @@ FALL = 'F'
 SPRING = 'S'
 SEMESTERS = ((SPRING, 'Spring'), (FALL, 'Fall'),)
 
-class Companies(models.Model):
+class Company(models.Model):
 	#Model defining the company table. It keeps track of companies members have worked for
 	company_name = models.CharField(max_length=63)
 	def __str__(self):
@@ -28,13 +28,13 @@ class Position(models.Model):
 	def __str__(self):
 		return self.title
 	
-class Organizations(models.Model):
+class Organization(models.Model):
 	#Model defining the organizations table. It keeps track of orgs members are involved in. 
 	name = models.CharField(max_length=63)
 	def __str__(self):
 		return self.name
 	
-class Cell_Carriers(models.Model):
+class Cell_Carrier(models.Model):
 	#table to define the list of cell carriers so they can be mapped to an SMS gateway address
 	name = models.CharField(max_length=63)
 	sms_address = models.CharField("SMS Email Gateway", max_length=63)
@@ -45,7 +45,7 @@ class Cell_Carriers(models.Model):
 class Job_History(models.Model):
 	#define the Job_History class here
 	member = models.ForeignKey('Profile', on_delete=models.CASCADE)
-	company = models.ForeignKey(Companies, on_delete=models.CASCADE)
+	company = models.ForeignKey(Company, on_delete=models.CASCADE)
 	title = models.CharField(max_length=63)
 	state = models.CharField(max_length=31)
 	city = models.CharField(max_length=31)
@@ -62,7 +62,7 @@ class Position_History(models.Model):
 class Organization_Involvement(models.Model):
 	#define the Organization_Involvement class here
 	member = models.ForeignKey('Profile', on_delete=models.CASCADE)
-	company = models.ForeignKey(Organizations, on_delete=models.CASCADE)
+	company = models.ForeignKey(Organization, on_delete=models.CASCADE)
 	position = models.CharField(max_length=63)
 
 def gen_file_path(instance, filename):
@@ -100,10 +100,10 @@ class Profile(models.Model):
 	photo = models.ImageField(upload_to=gen_file_path, blank=True)
 	last_random_pic_date =  models.DateField(null=True, blank=True)
 	pledge_father = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True)
-	cell_carrier_id = models.ForeignKey(Cell_Carriers, on_delete=models.CASCADE, null=True)
+	cell_carrier_id = models.ForeignKey(Cell_Carrier, on_delete=models.CASCADE, null=True)
 	positions = models.ManyToManyField(Position, through='Position_History')
-	organizations = models.ManyToManyField(Organizations, through='Organization_Involvement')
-	jobs = models.ManyToManyField(Companies, through='Job_History')
+	organizations = models.ManyToManyField(Organization, through='Organization_Involvement')
+	jobs = models.ManyToManyField(Company, through='Job_History')
 	
 	
 @receiver(post_save, sender=User)

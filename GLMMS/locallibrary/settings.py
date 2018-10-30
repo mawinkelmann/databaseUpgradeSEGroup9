@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     #Add our new application
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
 	'member.apps.MemberConfig',
+	'announcement.apps.AnnouncementConfig',
 ]
 
 MIDDLEWARE = [
