@@ -24,6 +24,9 @@ from django.urls import include
 
 urlpatterns += [
     path('catalog/', include('catalog.urls')),
+	path('member/', include('member.urls')),
+	path('event/', include('event.urls')),
+	path('announcement/', include('announcement.urls')),
 ]
 
 # Use static() to add url mapping to serve static files during development (only)
