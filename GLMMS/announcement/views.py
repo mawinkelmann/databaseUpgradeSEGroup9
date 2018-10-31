@@ -8,6 +8,12 @@ from django import forms
 from .models import Announcement
 
 # Create your views here.
-class AnnouncementsView(generic.DetailView):
-	model = Announcement
-	template_name = 'announcement/announcement_view_all.html'
+def AnnouncementsView(request):
+    num_announcements=Announcement.objects.all().count()
+
+    return render(
+        request,
+        'announcement_view_all.html',
+        context={
+            'num_announcements':num_announcements},
+    )
