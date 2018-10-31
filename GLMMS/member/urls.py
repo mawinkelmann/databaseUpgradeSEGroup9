@@ -10,7 +10,8 @@ urlpatterns = [
 	path('search/job/', views.job_search, name='job_search'),
 	path('search/position/', views.position_search, name='position_search'),
 	path('search/organization/', views.org_search, name='organization_search'),
-	path('search/single/<int:pk>/', views.SingleDetailView.as_view(), name='single_detail'),
+	path('search/profile/<int:pk>/', views.ProfileDetailView.as_view(), name='profile'),
+	path('search/profile/edit/<int:profile_id>', views.edit_info, name='edit_profile'),
 ]
 
 '''urlpatterns = [

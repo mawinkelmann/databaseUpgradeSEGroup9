@@ -121,16 +121,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
-
-
-
-
-
-
 
 
 # Static files (CSS, JavaScript, Images)

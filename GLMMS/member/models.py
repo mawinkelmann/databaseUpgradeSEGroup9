@@ -78,7 +78,7 @@ class Profile(models.Model):
 	INACTIVE = 'C'
 	NEWMEMBER = 'D'
 	SHIRTSIZE = (('M', 'Medium'), ('XS', 'Extra Small'), ('S', 'Small'), ('L', 'Large'), ('XL', 'Extra Large'), ('XXL', 'Double XL'), ('XXXL', 'Triple XL'),)
-	STATUS = ((ACTIVE, 'Active'), (ALUMNI, 'Alumni'), (INACTIVE, 'Inactive'),(NEWMEMBER, 'New Member'),)
+	STATUS = ((ACTIVE, 'Active'), (ALUMNI, 'Alumni'), (INACTIVE, 'Inactive'), (NEWMEMBER, 'New Member'),)
 	#collumns
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	bio = models.TextField(max_length=500, blank=True)
@@ -112,7 +112,7 @@ class Profile(models.Model):
 		
 	
 	def get_printable_fields(self):
-		fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields]
+		fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('bio', 'photo','linkedin profile')]
 		print(fields)
 		return fields
 	

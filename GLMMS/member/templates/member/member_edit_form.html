@@ -1,0 +1,26 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+
+<h1>Member Edit Info</h1>
+<h4>Edit your information and click save:</h4>
+
+<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Save">
+</form>
+<hr>
+{% if profile %}
+{% include "member/single_detail.html" %}
+{% endif %}
+ <!--
+<ul>
+{% for choice in quesiton.choice_set.all %}
+	<li>{{ choice.choice_text }}<li>
+{% endfor %}
+</ul>
+-->
+{% endblock %}
