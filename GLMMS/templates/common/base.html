@@ -28,7 +28,7 @@
    {% if user.is_authenticated %}
      <li>User: {{ user.get_username }}</li>
      <li><a href="{% url 'member:search_index' %}">Member Search</a></li>
-     <li><a href="{% url 'index' %}">Announcements</a></li>
+     <li><a href="{% url 'announcement:view_announcements' %}">Announcements</a></li>
      <li><a href="{% url 'index' %}">Events</a></li>
 	 <li><a href="{% url 'member:profile' user.profile.id %}">Your Profile</a></li>
      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>

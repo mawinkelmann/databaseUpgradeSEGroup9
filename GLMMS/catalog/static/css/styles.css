@@ -3,3 +3,18 @@
     padding: 0;
     list-style: none;
 }
+
+#announcementHolder{
+	position: relative;
+}
+
+#announcementCreator{
+	color: blue;
+	position: absolute;
+	height: 200px;
+}
+
+#announcementViewer{
+	position: absolute;
+	bottom: 50%;
+}
