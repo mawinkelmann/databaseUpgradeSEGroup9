@@ -8,3 +8,6 @@ from django import forms
 from .models import Announcement
 
 # Create your views here.
+class AnnouncementsView(generic.DetailView):
+	model = Announcement
+	template_name = 'announcement/announcement_view_all.html'
