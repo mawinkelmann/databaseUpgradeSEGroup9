@@ -47,3 +47,11 @@ urlpatterns += [
 urlpatterns += [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
+
+#add media file support
+from . import settings as mysettings
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+ 
+ 
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(mysettings.MEDIA_URL, document_root=mysettings.MEDIA_ROOT)

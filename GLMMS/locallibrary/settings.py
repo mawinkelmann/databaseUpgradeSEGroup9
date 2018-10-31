@@ -121,16 +121,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
-
-
-
-
-
-
 
 
 # Static files (CSS, JavaScript, Images)
@@ -139,6 +131,9 @@ LOGIN_REDIRECT_URL = '/'
 STATIC_ROOT = 'static'
 # The URL to use when referring to static files (where they will be served from)
 STATIC_URL = '/static/'
+#absolute path to where uploaded images are stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'

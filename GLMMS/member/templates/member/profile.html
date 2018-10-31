@@ -1,0 +1,5 @@
+{% extends "common/base.html" %}
+{% block content %}
+{% include "member/single_detail.html" %}
+<a href="{% url 'member:edit_profile' user.profile.id %}" class="btn btn-default">Edit Info</a>
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+
+<h1>Single Member Search</h1>
+<h4>Choose from one dropdown list:</h4>
+{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+
+<form action="{% url 'member:single_search' %}" method="POST">
+{% csrf_token %}
+{{ form }}
+<input type="submit" value="Search">
+</form>
+<hr>
+{% if profile %}
+{% include "member/single_detail.html" %}
+{% endif %}
+ <!--
+<ul>
+{% for choice in quesiton.choice_set.all %}
+	<li>{{ choice.choice_text }}<li>
+{% endfor %}
+</ul>
+-->
+{% endblock %}
