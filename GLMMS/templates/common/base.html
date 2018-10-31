@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	
+
   <!-- Add additional CSS in static file -->
   {% load static %}
   <link rel="stylesheet" href="{% static 'css/styles.css' %}">
@@ -28,7 +28,7 @@
    {% if user.is_authenticated %}
      <li>User: {{ user.get_username }}</li>
      <li><a href="{% url 'member:search_index' %}">Member Search</a></li>
-     <li><a href="{% url 'index' %}">Announcements</a></li>
+     <li><a href="{% url 'announcement:view_announcements' %}">Announcements</a></li>
      <li><a href="{% url 'index' %}">Events</a></li>
 	 <li><a href="{% url 'member:profile' user.profile.id %}">Your Profile</a></li>
      <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>
