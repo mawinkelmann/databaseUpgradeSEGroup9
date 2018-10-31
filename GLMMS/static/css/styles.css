@@ -1,9 +1,17 @@
-table, th, td {
-	    border: 1px solid black;
-}
 .sidebar-nav {
     margin-top: 20px;
     padding: 0;
     list-style: none;
 }
 
+.list-group-flush .list-group-item:first-child {
+  border-top: 0; }
+
+.list-group-item {
+  border-left: 0;
+  border-right: 0;
+}
+
+.links{
+  max-width: 50%;
+}
