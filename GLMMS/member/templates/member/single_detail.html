@@ -5,16 +5,16 @@
 {% if error_message %}<p class='error'><strong>{{ error_message }} </strong></p>{% endif %}
 
 <h1>{{ profile.user.first_name }} {{profile.user.last_name }}'s Profile</h1>
-<div class='col-sm-4'>
-{% if profile.photo %}
-<img src="{{ profile.photo.url }}" alt="profile picture" style="height:300px;max-width:300px;"/>
-{% else %}
-<img src="{% static '/member/images/coat.png' %}" alt="no profile picture" style="height:300px;max-width:300px;"/>
-{% endif %}
+<div class='col-sm-6'>
+	{% if profile.photo %}
+	<img src="{{ profile.photo.url }}" alt="profile picture" style="height:300px;max-width:300px;"/>
+	{% else %}
+	<img src="{% static '/member/images/coat.png' %}" alt="no profile picture" style="height:300px;max-width:300px;"/>
+	{% endif %}
 </div>
-<div class='col-sm-5'>
-	<h3>Bio</h3>
-	<p>{{ profile.bio }} </p>
+<div class='col-sm-6'>
+	<h3>Biography</h3>
+	<p>{{ profile.bio }}</p>
 	<br>
 	<h4>LinkedIn Profile</h4>
 	<a href="{{ profile.linkedin_profile }}" target="_blank">{{profile.linkedin_profile|default:"No profile"}}</a>
@@ -23,15 +23,15 @@
 <hr>
 
 <table class='table-bordered table-striped table-condensed cf'>
-<thead>
-{% for name, value in profile.get_printable_fields %}
+	<thead>
+		{% for name, value in profile.get_printable_fields %}
 		<th>{{ name }}</th>
-{% endfor %}
+		{% endfor %}
 	</thead>
 	<tr>
-{% for name, value in profile.get_printable_fields %}
+		{% for name, value in profile.get_printable_fields %}
 		<td>{{ value|default:"N/A" }}</td>
-{% endfor %}
+		{% endfor %}
 	</tr>
 </table>
  <!--
