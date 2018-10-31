@@ -145,3 +145,6 @@ LOGIN_REDIRECT_URL = '/'
 
 # email to console. remove to have system send to an actual email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
