@@ -4,11 +4,11 @@
 {% block content %}
 {% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
-<h1>Single Member Search</h1>
-<h4>Choose from one dropdown list:</h4>
+<h1>Multi-Member Search</h1>
+<h4>Choose your search criteria from the dropdown lists below:</h4>
 {% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
-<form action="{% url 'member:single_search' %}" method="POST">
+<form action="{% url 'member:multi_search' %}" method="POST">
 {% csrf_token %}
 <ul>
 {{ form.as_ul }}
@@ -16,8 +16,8 @@
 <input type="submit" value="Search">
 </form>
 <hr>
-{% if profile %}
-{% include "member/single_detail.html" %}
+{% if results %}
+{% include "member/print_table.html" %}
 {% endif %}
  <!--
 <ul>
