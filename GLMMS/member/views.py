@@ -7,6 +7,7 @@ from django import forms
 #from django.template import loader 
 
 from django.contrib.auth.models import User
+from django.core import serializers
 from .models import Profile
 
 class ProfileDetailView(generic.DetailView):
@@ -69,20 +70,23 @@ def search_index(request):
 	return render(request, 'member/search_index.html')
 	
 def single_search(request):
-	if request.method == 'POST':
-		form = SingleSearchForm(request.POST)
-		profile = None
-		if form.is_valid():
-			for key in form.cleaned_data:
-				if form.cleaned_data[key]:
-					profile = Profile.objects.get(pk=int(form.cleaned_data[key]))
-			if profile is not None:
-				return render(request, 'member/single_search.html', {'form': form, 'profile': profile})
-			return render(request, 'member/single_search.html', {'form': form, 'error_message': "Please select a member from one of the lists!"})
-	else:
-		form = SingleSearchForm()
-	return render(request, 'member/single_search.html', {'form': form})
-	
+    if request.method == 'POST':
+        form = SingleSearchForm(request.POST)
+        profile = None
+        if form.is_valid():
+            for key in form.cleaned_data:
+                if form.cleaned_data[key]:
+                    profile = Profile.objects.get(pk=int(form.cleaned_data[key]))
+                    choices = Profile.get_printable_fields()
+                    del choices['linkedin_profile']
+                    data = serializers.serialize( "python", [profile], fields=choices)
+            if profile is not None:
+                return render(request, 'member/single_search.html', {'form': form, 'profile': profile, 'data': data})
+            return render(request, 'member/single_search.html', {'form': form, 'error_message': "Please select a member from one of the lists!"})
+    else:
+        form = SingleSearchForm()
+    return render(request, 'member/single_search.html', {'form': form})
+
 def edit_info(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	if request.method == "POST":
