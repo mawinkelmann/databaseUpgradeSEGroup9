@@ -6,4 +6,7 @@ table, th, td {
     padding: 0;
     list-style: none;
 }
+#loginDropdown {
+    list-style-type: none;
+}
 

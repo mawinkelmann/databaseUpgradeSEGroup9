@@ -17,6 +17,15 @@
 
 <form method="post" action="{% url 'login' %}">
 {% csrf_token %}
+<!-- <div class="col-sm-4 input-group ">
+  <span class="input-group-addon" id="sizing-addon2">@</span>
+  <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
+</div>
+<br>
+<div class="col-sm-4 input-group ">
+  <span class="input-group-addon" id="sizing-addon2">@</span>
+  <input type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
+</div> -->
 <table>
 <tr>
     <td>{{ form.username.label_tag }}</td>
