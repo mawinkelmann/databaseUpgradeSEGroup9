@@ -90,7 +90,7 @@ def single_search(request):
 def edit_info(request, profile_id):
 	profile = get_object_or_404(Profile, pk=profile_id)
 	if request.method == "POST":
-		pro_form = ProfileEditForm(request.POST, instance=profile)
+		pro_form = ProfileEditForm(request.POST, request.FILES, instance=profile)
 		user_form = UserEditForm(request.POST, instance=profile.user)
 		if pro_form.is_valid() and user_form.is_valid():
 			profile = pro_form.save()
