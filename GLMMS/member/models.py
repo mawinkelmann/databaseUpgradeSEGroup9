@@ -85,7 +85,7 @@ class Profile(models.Model):
 	phone = models.CharField("phone number", max_length=14, blank=True)
 	address = models.CharField(max_length=255, blank=True)
 	pledge_class = models.CharField(max_length=31, blank=True)
-	major = models.CharField("decalared major", max_length=63, blank=True)
+	major = models.CharField("declared major", max_length=63, blank=True)
 	major2 = models.CharField("second major", max_length=63, blank=True)
 	emphasis = models.CharField(max_length=63, blank=True)
 	grad_semester = models.CharField("semester graduating", max_length=1, choices=SEMESTERS, blank=True)
@@ -110,10 +110,16 @@ class Profile(models.Model):
 	def __str__(self):
 		return "{0}: {1} {2}".format(self.user.username, self.user.first_name, self.user.last_name)
 		
-	
-	def get_printable_fields(self):
-		fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('bio', 'photo','linkedin profile')]
-		print(fields)
+	@staticmethod
+	def get_printable_fields():
+		fields = {}
+		for field in Profile._meta.get_fields():
+			if field.name not in ('user', 'bio', 'photo', 'jobs', 'organizations', 'positions', 'pledge_father', 'cell_carrier_id', 'id'):
+				try:
+					fields[field.name] = field.verbose_name
+				except AttributeError:
+					pass
+		#fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('bio', 'photo','linkedin profile')]
 		return fields
 	
 @receiver(post_save, sender=User)

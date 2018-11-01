@@ -3,6 +3,7 @@
 {% block content %}
 {% load static %}
 {% if error_message %}<p class='error'><strong>{{ error_message }} </strong></p>{% endif %}
+
 <hr>
 <h1 style=>{{ profile.user.first_name }} {{profile.user.last_name }}'s Profile</h1>
 <div class="row justify-content-center">
@@ -23,18 +24,41 @@
 		<div class="col-2"></div>
 	  </div>
 	  <hr>
-<table class='table-bordered table-striped table-condensed cf'>
-	<thead>
-		{% for name, value in profile.get_printable_fields %}
-		<th>{{ name }}</th>
-		{% endfor %}
-	</thead>
-	<tr>
-		{% for name, value in profile.get_printable_fields %}
-		<td>{{ value|default:"N/A" }}</td>
-		{% endfor %}
-	</tr>
-</table>
+	  <table class='table-bordered table-striped table-condensed cf'>
+
+			<thead>
+		
+				<th>Username</th>
+		
+				{% for name, value in profile.get_printable_fields.items %}
+		
+					{% if name != 'linkedin_profile' %}
+		
+						<th>{{ value }}</th>
+		
+					{% endif %}
+		
+				{% endfor %}
+		
+			</thead>
+		
+			<tr>
+		
+				<td>{{ profile.user.username }}</td>
+		
+				{% for item in data %}
+		
+					{% for field, value in item.fields.items %}
+		
+					<td>{{ value|default:"N/A" }}</td>
+		
+					{% endfor %}
+		
+				{% endfor %}
+		
+			</tr>
+		
+		</table>
  <!--
 <ul>
 {% for choice in quesiton.choice_set.all %}
