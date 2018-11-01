@@ -7,59 +7,42 @@
 <hr>
 <h1 style=>{{ profile.user.first_name }} {{profile.user.last_name }}'s Profile</h1>
 <div class="row justify-content-center">
-		<div class="col-4">
-				{% if profile.photo %}
-				<img src="{{ profile.photo.url }}" alt="profile picture" style="height:300px;max-width:300px;"/>
-				{% else %}
-				<img src="{% static '/member/images/coat.png' %}" alt="no profile picture" style="height:300px;max-width:300px;"/>
-				{% endif %}
-		</div>
-		<div class="col-6">
-				<h3>Biography</h3>
-				<p>{{ profile.bio }}</p>
-				<br>
-				<h4>LinkedIn Profile</h4>
-				<a href="{{ profile.linkedin_profile }}" target="_blank">{{profile.linkedin_profile|default:"No profile"}}</a>
-		</div>
-		<div class="col-2"></div>
-	  </div>
-	  <hr>
-	  <table class='table-bordered table-striped table-condensed cf'>
-
-			<thead>
-		
-				<th>Username</th>
-		
-				{% for name, value in profile.get_printable_fields.items %}
-		
-					{% if name != 'linkedin_profile' %}
-		
-						<th>{{ value }}</th>
-		
-					{% endif %}
-		
-				{% endfor %}
-		
-			</thead>
-		
-			<tr>
-		
-				<td>{{ profile.user.username }}</td>
-		
-				{% for item in data %}
-		
-					{% for field, value in item.fields.items %}
-		
-					<td>{{ value|default:"N/A" }}</td>
-		
-					{% endfor %}
-		
-				{% endfor %}
-		
-			</tr>
-		
-		</table>
- <!--
+	<div class="col-4">
+		{% if profile.photo %}
+		<img src="{{ profile.photo.url }}" alt="profile picture" style="height:300px;max-width:300px;" />
+		{% else %}
+		<img src="{% static '/member/images/coat.png' %}" alt="no profile picture" style="height:300px;max-width:300px;" />
+		{% endif %}
+	</div>
+	<div class="col-6">
+		<h3>Biography</h3>
+		<p>{{ profile.bio }}</p>
+		<br>
+		<h4>LinkedIn Profile</h4>
+		<a href="{{ profile.linkedin_profile }}" target="_blank">{{profile.linkedin_profile|default:"No profile"}}</a>
+	</div>
+	<div class="col-2"></div>
+</div>
+<hr>
+<table class='table-bordered table-striped table-condensed cf'>
+	<thead>
+		<th>Username</th>
+		{% for name, value in profile.get_printable_fields.items %}
+		{% if name != 'linkedin_profile' %}
+		<th>{{ value }}</th>
+		{% endif %}
+		{% endfor %}
+	</thead>
+	<tr>
+		<td>{{ profile.user.username }}</td>
+		{% for item in data %}
+		{% for field, value in item.fields.items %}
+		<td>{{ value|default:"N/A" }}</td>
+		{% endfor %}
+		{% endfor %}
+	</tr>
+</table>
+<!--
 <ul>
 {% for choice in quesiton.choice_set.all %}
 	<li>{{ choice.choice_text }}<li>
