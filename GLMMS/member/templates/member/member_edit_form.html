@@ -5,6 +5,7 @@
 {% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
 <h1>Member Edit Info</h1>
+<hr>
 <h4>Edit your information and click save:</h4>
 
 <form action="{% url 'member:edit_profile' user.profile.id %}" method="POST">
