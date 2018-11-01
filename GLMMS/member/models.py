@@ -121,6 +121,10 @@ class Profile(models.Model):
 					pass
 		#fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('bio', 'photo','linkedin profile')]
 		return fields
+
+	def get_printable_fields_and_values(self):
+		fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('ID','user','bio', 'photo','linkedin profile','pledge father', 'cell carrier id',)]
+		return fields
 	
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):

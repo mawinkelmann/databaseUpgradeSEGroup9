@@ -93,7 +93,7 @@ def edit_info(request, profile_id):
 		pro_form = ProfileEditForm(request.POST, instance=profile)
 		user_form = UserEditForm(request.POST, instance=profile.user)
 		if pro_form.is_valid() and user_form.is_valid():
-			profile = form.save()
+			profile = pro_form.save()
 			user_form.save()
 			#return HttpResponseRedirect(reverse('member:profile', args=(question.id,)))
 			return render(request, 'member/profile.html', {'profile': profile, 'error_message': "Changes have been saved!"})
