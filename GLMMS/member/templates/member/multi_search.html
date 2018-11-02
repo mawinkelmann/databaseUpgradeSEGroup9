@@ -1,3 +1,5 @@
+{# This template displays the multiple member serach page.  #}
+
 {% extends "common/base.html" %}
 {% load static %}
 
@@ -16,7 +18,7 @@
 <input type="submit" value="Search">
 </form>
 <hr>
-{% if results %}
+{% if fields %}
 {% include "member/print_table.html" %}
 {% endif %}
  <!--

@@ -1,3 +1,4 @@
+'''this file defines the models of the member application'''
 import datetime
 
 from django.db import models
@@ -12,7 +13,7 @@ SPRING = 'S'
 SEMESTERS = ((SPRING, 'Spring'), (FALL, 'Fall'),)
 
 class Company(models.Model):
-	#Model defining the company table. It keeps track of companies members have worked for
+	'''Model defining the company table. It keeps track of companies members have worked for'''
 	company_name = models.CharField(max_length=63)
 	def __str__(self):
 		return self.company_name
@@ -29,13 +30,13 @@ class Position(models.Model):
 		return self.title
 	
 class Organization(models.Model):
-	#Model defining the organizations table. It keeps track of orgs members are involved in. 
+	'''Model defining the organizations table. It keeps track of orgs members are involved in.'''
 	name = models.CharField(max_length=63)
 	def __str__(self):
 		return self.name
 	
 class Cell_Carrier(models.Model):
-	#table to define the list of cell carriers so they can be mapped to an SMS gateway address
+	'''table to define the list of cell carriers so they can be mapped to an SMS gateway address'''
 	name = models.CharField(max_length=63)
 	sms_address = models.CharField("SMS Email Gateway", max_length=63)
 	
@@ -43,7 +44,7 @@ class Cell_Carrier(models.Model):
 		return self.name
 	
 class Job_History(models.Model):
-	#define the Job_History class here
+	'''Table relating companies to profiles'''
 	member = models.ForeignKey('Profile', on_delete=models.CASCADE)
 	company = models.ForeignKey(Company, on_delete=models.CASCADE)
 	title = models.CharField(max_length=63)
@@ -53,24 +54,26 @@ class Job_History(models.Model):
 	end_date = models.DateField(null=True, blank=True)
 	
 class Position_History(models.Model):
-	#define the Position_History class here
+	'''table relating positions to profiles'''
 	member = models.ForeignKey('Profile', on_delete=models.CASCADE)
 	position = models.ForeignKey(Position, on_delete=models.CASCADE)
 	semester = models.CharField(max_length=1, choices=SEMESTERS)
 	year = models.CharField(max_length=4)
 	
 class Organization_Involvement(models.Model):
-	#define the Organization_Involvement class here
+	'''table for the relation of profiles to orgs'''
 	member = models.ForeignKey('Profile', on_delete=models.CASCADE)
 	company = models.ForeignKey(Organization, on_delete=models.CASCADE)
 	position = models.CharField(max_length=63)
 
 def gen_file_path(instance, filename):
+	'''returns a path to save a profile picture for the profile object. it will be loctaed relative to the MEDIA_ROOT defined in setting.py'''
 	return 'profile_pics/{0}_{1}'.format(instance.user.username, filename)
 
 #models are given an id pk field automatically 
 #doc for user model here https://docs.djangoproject.com/en/2.1/ref/contrib/auth/
 class Profile(models.Model):
+	'''This is the class holding additional information about each user. Has a one-to-one rel to Django defined User'''
 	#Note: User.username should be the user's pawprint
 	#enums
 	ACTIVE = 'A'
@@ -104,14 +107,16 @@ class Profile(models.Model):
 	positions = models.ManyToManyField(Position, through='Position_History')
 	organizations = models.ManyToManyField(Organization, through='Organization_Involvement')
 	jobs = models.ManyToManyField(Company, through='Job_History')
+
+	def __str__(self):
+		return "{0}: {1} {2}".format(self.user.username, self.user.first_name, self.user.last_name)
+	
 	#we dont want to display linkedin_profile, photo, bio, 
 	#cell carrier id and user id need some work. 
 	#only display gpa if the member calling it is the user
-	def __str__(self):
-		return "{0}: {1} {2}".format(self.user.username, self.user.first_name, self.user.last_name)
-		
 	@staticmethod
 	def get_printable_fields():
+		'''return a dict of fields[field.name] = field.verbose_name. ie keys= field names and values = verbose field names'''
 		fields = {}
 		for field in Profile._meta.get_fields():
 			if field.name not in ('user', 'bio', 'photo', 'jobs', 'organizations', 'positions', 'pledge_father', 'cell_carrier_id', 'id'):
@@ -123,17 +128,30 @@ class Profile(models.Model):
 		return fields
 
 	def get_printable_fields_and_values(self):
+		'''returns a list of (verbose_name,value to string) for each field of this profile instance'''
 		fields = [(field.verbose_name, field.value_to_string(self)) for field in Profile._meta.fields if field.verbose_name not in ('ID','user','bio', 'photo','linkedin profile','pledge father', 'cell carrier id',)]
 		return fields
-	
+
+	@staticmethod
+	def get_all_members_by_category(blank):
+		'''returns a dict of {category: [(profile.id, str(profile))]}'''
+		choices = {Profile.ACTIVE: None, Profile.ALUMNI: None, Profile.NEWMEMBER: None, Profile.INACTIVE: None}
+		for key in choices:
+			choices[key] = [(profile.id, str(profile)) for profile in Profile.objects.filter(member_status=key).order_by('user__username')]
+			choices[key].append(('', blank))
+		print(choices)
+		return choices
+
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-    if created:
-        Profile.objects.create(user=instance)
+	'''catch the creation of a user and make a profile for them too'''
+	if created:
+		Profile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-    instance.profile.save()
+	'''catch the save of a user and save the profile too.'''
+	instance.profile.save()
 
 	
 
