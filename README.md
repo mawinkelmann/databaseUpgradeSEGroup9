@@ -1,5 +1,7 @@
 # Greek Life Member Management System
 
+## Set up the system and deploy to a localhost
+
 - Install Python 3 and set up development environment: https://developer.mozilla.org/en-US/docs/Learn/Server-side/Django/development_environment
 - Follow the steps provided in the link.
 - When you get to the installation of virtualenvwrapper you may need to use -H in the sudo command to get it to install properly (e.g. sudo **-H** pip3 install virtualenvwrapper)
