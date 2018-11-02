@@ -1,4 +1,4 @@
-{# {% block title %}{{ profile.user.first_name }} {{profile.user.last_name }}: Details {% endblock %} #}
+{# This template shows the profile for a single user. Include it in a template that has `profile` in the context #}
 
 {% block content %}
 {% load static %}
@@ -19,7 +19,7 @@
 		<p>{{ profile.bio }}</p>
 		<br>
 		<h3>Email</h3>
-		<p>{{ user.email }}</p>
+		<p>{{ profile.user.email }}</p>
 		<br>
 		<h4>LinkedIn Profile</h4>
 		<a href="{{ profile.linkedin_profile }}" target="_blank">{{profile.linkedin_profile|default:"No profile"}}</a>

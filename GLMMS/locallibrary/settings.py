@@ -124,9 +124,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-# Redirect to home URL after login (Default redirects to /accounts/profile/)
-LOGIN_REDIRECT_URL = '/'
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -140,6 +137,7 @@ MEDIA_URL = '/media/'
 
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
 
 # email to console. remove to have system send to an actual email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
