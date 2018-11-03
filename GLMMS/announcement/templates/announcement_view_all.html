@@ -16,6 +16,7 @@
 {% if announcement_list %}
 <table class='table-bordered table-striped table-condensed cf'>
   <thead>
+      <th>Date</th>
       <th>Creator</th>
       <th>Title</th>
       <th>Topic</th>
@@ -24,6 +25,7 @@
   </thead>
   {% for announcement in announcement_list %}
       <tr>
+          <td> {{ announcement.dateAdded }} </td>
           <td> {{ announcement.creator }} </td>
           <td> {{ announcement.title }} </td>
           <td> {{ announcement.topic }} </td>

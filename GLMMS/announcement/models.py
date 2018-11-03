@@ -19,7 +19,7 @@ class Announcement(models.Model):
 	topic = models.CharField(max_length=1, choices=TOPICS, default=GENERAL)
 	type = models.CharField(max_length=1, choices=TYPES, default=NORMAL)
 	message = models.TextField()
-	#dateAdded = models.DateTimeField(auto_now_add=True)
+	dateAdded = models.DateTimeField(auto_now_add=True)
 
 	def __str__(self):
 		return self.title
