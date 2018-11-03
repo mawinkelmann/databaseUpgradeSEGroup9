@@ -13,21 +13,19 @@
 <h1>Announcements</h1>
 <div>
 
+  {% if announcement_list %}
+  <ul>
 
+    {% for announcement in announcement_list %}
+    <li>{{ announcement.message }}</li>
+    {% endfor %}
+
+  </ul>
+
+  {% else %}
+    <p>There are no announcements.</p>
+  {% endif %}
 
 </div>
-
-
-<!-- {% if latest_question_list %}
-<ul>
-{% for question in latest_question_list %} -->
-	<!--<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
-	<!-- <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-{% endfor %}
-</ul>
-
-{% else %}
-	<p>No polls are available. </p>
-{% endif %} -->
 
 {% endblock %}

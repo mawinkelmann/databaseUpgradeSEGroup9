@@ -13,14 +13,16 @@ def AnnouncementsView(request):
 
     template_name = 'member/profile.html'
 
+    message=Announcement.message
+
     # Number of visits to this view, as counted in the session variable.
     num_visits=request.session.get('num_visits', 0)
     request.session['num_visits'] = num_visits+1
 
-    # Render the HTML template index.html with the data in the context variable.
     return render(
         request,
         'announcement_view_all.html',
         context={
-            'num_visits':num_visits},
+            'num_visits':num_visits,
+            'message':message},
     )

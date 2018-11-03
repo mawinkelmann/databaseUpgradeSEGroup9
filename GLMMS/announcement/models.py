@@ -19,15 +19,4 @@ class Announcement(models.Model):
 	type = models.CharField(max_length=1, choices=TYPES, default=NORMAL)
 	message = models.TextField()
 
-	ANNOUNCEMENT_STATUS = (
-        ('A', 'GENERAL'),
-        ('B', 'SOCIAL'),
-        ('C', 'PROFESSIONAL'),
-        ('D', 'PHILANTHROPY'),
-		('E', 'RECRUITMENT'),
-        ('F', 'NEWMEMBER'),
-        ('G', 'NORMAL'),
-        ('H', 'URGENT'),
-    )
-
-    #status= models.CharField(max_length=1, choices=ANNOUNCEMENT_STATUS, blank=True, default='A', help_text='Anouncemnent type')
+    
