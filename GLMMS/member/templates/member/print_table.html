@@ -1,4 +1,7 @@
+{# this file will print a table containing the fields and values for each profile object given. The context needs to contain `fields` which is a list of verbose field names and results which is a zipped list of profiles and serialized profiles #}
+
 {% load static %}
+{% if results %}
 <h1>Number of Results: {{ results|length }}</h1>
 <table class='table-bordered table-striped table-condensed cf'>
 <thead>
@@ -20,3 +23,6 @@
     </tr>
 {% endfor %}
 </table>
+{% else %}
+<h1>Number of Results: 0</h1>
+{% endif %}

@@ -1,27 +1,27 @@
+{# This template displays an edit form for editable fields of a profile object. Requires a `profile_form` and a `user_form` #}
+
 {% extends "common/base.html" %}
 {% load static %}
 
 {% block content %}
-{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+{% if user.profile %}
+	{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
-<h1>Member Edit Info</h1>
-<hr>
-<h4>Edit your information and click save:</h4>
+	<h1>Member Edit Info</h1>
+	<hr>
+	<h4>Edit your information and click save:</h4>
 
-<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST" enctype='multipart/form-data'>
-{% csrf_token %}
-<ul>
-	{{ user_form.as_ul }}
-	{{ profile_form.as_ul }}
-</ul>
-<input type="submit" value="Save">
-</form>
-<hr>
- <!--
-<ul>
-{% for choice in quesiton.choice_set.all %}
-	<li>{{ choice.choice_text }}<li>
-{% endfor %}
-</ul>
--->
+	<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST" enctype='multipart/form-data'>
+	{% csrf_token %}
+	<ul>
+		{{ user_form.as_ul }}
+		{{ profile_form.as_ul }}
+	</ul>
+	<input type="submit" value="Save">
+	</form>
+	<hr>
+{% else %}
+	<p>You are not logged in or you have no profile</p>
+{% endif %}
+
 {% endblock %}
