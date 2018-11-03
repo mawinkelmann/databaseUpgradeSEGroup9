@@ -13,23 +13,31 @@
 <h1>Announcements</h1>
 <div>
 
-  {% if announcement_list %}
-  <ul>
-
-    {% for announcement in announcement_list %}
-    <li>{{ announcement.message }}</li>
-    {% endfor %}
-
-
-  </ul>
-
-</div>
-
-
-
+{% if announcement_list %}
+<table class='table-bordered table-striped table-condensed cf'>
+  <thead>
+      <th>Creator</th>
+      <th>Title</th>
+      <th>Topic</th>
+      <th>Type</th>
+  		<th>Message</th>
+  </thead>
+  {% for announcement in announcement_list %}
+      <tr>
+          <td>{{ announcement.creator }}</td>
+          <td>{{ announcement.title }}</td>
+          <td>{{ announcement.topic }}</td>
+          <td> {{ announcement.type }}</td>
+          <td> {{ announcement.message }}</td>
+      </tr>
+  {% endfor %}
+  </table>
   {% else %}
     <p>There are no announcements.</p>
   {% endif %}
+
+</div>
+
 
 </div>
 

@@ -9,20 +9,30 @@ from .models import Announcement
 
 # Create your views here.
 
-def AnnouncementsView(request):
+# def AnnouncementsView(request):
+#
+#     template_name = 'member/profile.html'
+#
+#     message=Announcement.message
+#
+#     # Number of visits to this view, as counted in the session variable.
+#     num_visits=request.session.get('num_visits', 0)
+#     request.session['num_visits'] = num_visits+1
+#
+#     return render(
+#         request,
+#         'announcement_view_all.html',
+#         context={
+#             'num_visits':num_visits,
+#             'message':message},
+#     )
 
-    template_name = 'member/profile.html'
+class AnnouncementsView(generic.ListView):
+    model = Announcement
+    template_name = 'announcement_view_all.html'
 
-    message=Announcement.message
+    def get_queryset(self):
+        return Announcement.objects.all()
 
-    # Number of visits to this view, as counted in the session variable.
-    num_visits=request.session.get('num_visits', 0)
-    request.session['num_visits'] = num_visits+1
-
-    return render(
-        request,
-        'announcement_view_all.html',
-        context={
-            'num_visits':num_visits,
-            'message':message},
-    )
+class DetailView(generic.DetailView):
+    model = Announcement
