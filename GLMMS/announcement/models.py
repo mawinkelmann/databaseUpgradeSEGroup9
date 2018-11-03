@@ -18,5 +18,3 @@ class Announcement(models.Model):
 	topic = models.CharField(max_length=1, choices=TOPICS, default=GENERAL)
 	type = models.CharField(max_length=1, choices=TYPES, default=NORMAL)
 	message = models.TextField()
-
-    

@@ -1,17 +1,17 @@
+{# This template shows the index page for the search functions. This requires no centext #}
+
 {% extends "common/base.html" %}
 {# {% block title %} Member Search {% endblock %} #}
 
 {% block content %}
-
 <h1>Member Information Search Index</h1>
 <hr>
 <h4>Choose the type of search to perform</h4>
-<ul>
-	<li><a href="{% url 'member:single_search'%}">Single Member Search</a></li>
-	<li><a href="{% url 'member:mult_search'%}">Multi Member Search</a></li>
-	<li><a href="{% url 'member:job_search'%}">Job Search</a></li>
-	<li><a href="{% url 'member:position_search'%}">Position Search</a></li>
-	<li><a href="{% url 'member:organization_search'%}">Organization Search</a></li>
-</ul>
-
+<div class="col-4 list-group">
+	<a class="list-group-item list-group-item-action" href="{% url 'member:single_search'%}">Single Member Search</a>
+	<a class="list-group-item list-group-item-action" href="{% url 'member:multi_search'%}">Multi-Member Search</a>
+	<a class="list-group-item list-group-item-action" href="{% url 'member:job_search'%}">Job Search</a>
+	<a class="list-group-item list-group-item-action" href="{% url 'member:position_search'%}">Position Search</a>
+	<a class="list-group-item list-group-item-action" href="{% url 'member:organization_search'%}">Organization Search</a>
+</div>
 {% endblock %}

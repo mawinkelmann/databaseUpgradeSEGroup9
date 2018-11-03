@@ -1,5 +1,11 @@
+{# This template is for the profile page. needs `profile` in the context #}
+
 {% extends "common/base.html" %}
 {% block content %}
-{% include "member/single_detail.html" %}
-<a href="{% url 'member:edit_profile' user.profile.id %}" class="btn btn-default">Edit Info</a>
+    {% if user.profile %}
+        {% include "member/single_detail.html" %}
+        <a href="{% url 'member:edit_profile' user.profile.id %}" class="btn btn-default">Edit Info</a>
+    {% else %}
+        <p>You are not logged in or you have no profile</p>
+    {% endif %}
 {% endblock %}
