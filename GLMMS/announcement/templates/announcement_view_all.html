@@ -28,8 +28,31 @@
           <td> {{ announcement.dateAdded }} </td>
           <td> {{ announcement.creator }} </td>
           <td> {{ announcement.title }} </td>
-          <td> {{ announcement.topic }} </td>
-          <td> {{ announcement.type }} </td>
+
+          <!-- if to convert internal topic codes to readable format -->
+          {% if announcement.topic == 'A' %}
+          <td> General </td>
+          {% elif announcement.topic == 'B' %}
+          <td> Social </td>
+          {% elif announcement.topic == 'C' %}
+          <td> Professional </td>
+          {% elif announcement.topic == 'D' %}
+          <td> Philanthropy </td>
+          {% elif announcement.topic == 'E' %}
+          <td> Recruitment </td>
+          {% elif announcement.topic == 'F' %}
+          <td> Social </td>
+          {% else %}
+          <td> New Member </td>
+          {% endif %}
+
+          <!-- if to convert internal type codes to readable format -->
+          {% if announcement.type == 'G' %}
+          <td> Normal </td>
+          {% else %}
+          <td class=text-danger> <strong> URGENT </strong> </td>
+          {% endif %}
+
           <td> {{ announcement.message }} </td>
       </tr>
   {% endfor %}
