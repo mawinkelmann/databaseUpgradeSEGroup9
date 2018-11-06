@@ -3,8 +3,11 @@
 
 {% block content %}
 
+{% load sorter %}
+
 <h1>Create Announcement</h1>
 <div>
+
 
 
 
@@ -16,11 +19,11 @@
 {% if announcement_list %}
 <table class='table-bordered table-striped table-condensed cf'>
   <thead>
-      <th>Date</th>
-      <th>Creator</th>
+      <th><a href="?{% url_replace request 'order_by' 'dateAdded' '-' %}">Date</a></th>
+      <th><a href="?{% url_replace request 'order_by' 'creator' '-' %}">Creator</a></th>
       <th>Title</th>
-      <th>Topic</th>
-      <th>Type</th>
+      <th><a href="?{% url_replace request 'order_by' 'topic' '-' %}">Topic</a></th>
+      <th><a href="?{% url_replace request 'order_by' 'type' '-' %}">Type</a></th>
   		<th>Message</th>
   </thead>
   {% for announcement in announcement_list %}
