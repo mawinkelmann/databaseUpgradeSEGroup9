@@ -17,4 +17,4 @@ class AnnouncementsView(generic.ListView):
     #Model.objects.all().order_by(order_by)
 
     def get_queryset(self):
-        return Announcement.objects.all()
+        return Announcement.objects.all().order_by('-dateAdded')
