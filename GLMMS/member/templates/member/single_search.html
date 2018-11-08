@@ -1,6 +1,7 @@
 {# This template is for the single member search page #}
 
 {% extends "common/base.html" %}
+{% load crispy_forms_tags %}
 {% load static %}
 
 {% block content %}
@@ -14,7 +15,7 @@
 <form action="{% url 'member:single_search' %}" method="POST">
 	{% csrf_token %}
 	<ul>
-		{{ form.as_ul }}
+		{{ form|crispy }}
 	</ul>
 	<input type="submit" value="Search">
 </form>
