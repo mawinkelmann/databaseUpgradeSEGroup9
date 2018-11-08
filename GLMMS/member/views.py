@@ -28,7 +28,7 @@ class SingleSearchForm(forms.Form):
 	newmembers_choice = forms.ChoiceField(required=False, choices=Profile.get_all_members_by_category(BLANK)[Profile.NEWMEMBER], label="New Members")
 	inactives_choice = forms.ChoiceField(required=False, choices=Profile.get_all_members_by_category(BLANK)[Profile.INACTIVE], label="Inactive Members")
 
-	
+	'''this is where to manipulate the forms'''
 class MultiSearchForm(forms.Form):
 	'''Form class for the multi member search view'''
 	#get the data to populate the select forms with
