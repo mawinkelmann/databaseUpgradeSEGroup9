@@ -13,8 +13,19 @@
 
 <form action="{% url 'member:multi_search' %}" method="POST">
 	{% csrf_token %}
-	{{ form|crispy }}
-	<input type="submit" value="Search">
+	<div class="row">
+		<div class="col-sm-12 col-lg-12">
+			{{ form.status_choice|as_crispy_field }}
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			{{ form.field_choice|as_crispy_field }}
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			{{ form.order_choice|as_crispy_field }}
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+	<input class="btn btn-danger" type="submit" value="Search">
 </form>
 <hr>
 {% if fields %}

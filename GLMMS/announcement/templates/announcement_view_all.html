@@ -16,18 +16,20 @@
 <h1>Announcements</h1>
 <div>
 
-{% if announcement_list %}
-<table class='table-bordered table-striped table-condensed cf'>
-  <thead>
-      <th><a href="?{% url_replace request 'order_by' 'dateAdded' '-' %}">Date</a></th>
-      <th><a href="?{% url_replace request 'order_by' 'creator' '-' %}">Creator</a></th>
-      <th>Title</th>
-      <th><a href="?{% url_replace request 'order_by' 'topic' '-' %}">Topic</a></th>
-      <th><a href="?{% url_replace request 'order_by' 'type' '-' %}">Type</a></th>
-  		<th>Message</th>
-  </thead>
-  {% for announcement in announcement_list %}
-      <tr>
+  {% if announcement_list %}
+  <div class="table-responsive">
+    <table class="table table-bordered">
+      <thead class="thead-light">
+        <th><a href="?{% url_replace request 'order_by' 'dateAdded' '-' %}">Date</a></th>
+        <th><a href="?{% url_replace request 'order_by' 'creator' '-' %}">Creator</a></th>
+        <th>Title</th>
+        <th><a href="?{% url_replace request 'order_by' 'topic' '-' %}">Topic</a></th>
+        <th><a href="?{% url_replace request 'order_by' 'type' '-' %}">Type</a></th>
+        <th>Message</th>
+      </thead>
+      {% for announcement in announcement_list %}
+      <tbody>
+        <tr>
           <td> {{ announcement.dateAdded }} </td>
           <td> {{ announcement.creator }} </td>
           <td> {{ announcement.title }} </td>
@@ -57,15 +59,14 @@
           {% endif %}
 
           <td> {{ announcement.message }} </td>
-      </tr>
-  {% endfor %}
-  </table>
-  {% else %}
+        </tr>
+      </tbody>
+      {% endfor %}
+    </table>
+    {% else %}
     <p>There are no announcements.</p>
-  {% endif %}
-
-</div>
-
+    {% endif %}
+  </div>
 
 </div>
 

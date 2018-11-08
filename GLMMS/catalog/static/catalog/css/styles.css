@@ -20,3 +20,7 @@
 .links{
   max-width: 65%;
 }
+
+a {
+  color: #dc3545;
+}
