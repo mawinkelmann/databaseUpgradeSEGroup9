@@ -2,6 +2,7 @@
 
 {% extends "common/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 {% if user.profile %}
@@ -13,10 +14,8 @@
 
 	<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST" enctype='multipart/form-data'>
 	{% csrf_token %}
-	<ul>
-		{{ user_form.as_ul }}
-		{{ profile_form.as_ul }}
-	</ul>
+	{{ user_form|crispy }}
+	{{ profile_form|crispy }}
 	<input type="submit" value="Save">
 	</form>
 	<hr>
