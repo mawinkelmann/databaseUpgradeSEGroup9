@@ -3,31 +3,70 @@
 
 {% block content %}
 
+{% load sorter %}
+
 <h1>Create Announcement</h1>
 <div>
 
 
 
+
 </div>
 
-<!--<h1>Announcements</h1>
+<h1>Announcements</h1>
 <div>
 
+{% if announcement_list %}
+<table class='table-bordered table-striped table-condensed cf'>
+  <thead>
+      <th><a href="?{% url_replace request 'order_by' 'dateAdded' '-' %}">Date</a></th>
+      <th><a href="?{% url_replace request 'order_by' 'creator' '-' %}">Creator</a></th>
+      <th>Title</th>
+      <th><a href="?{% url_replace request 'order_by' 'topic' '-' %}">Topic</a></th>
+      <th><a href="?{% url_replace request 'order_by' 'type' '-' %}">Type</a></th>
+  		<th>Message</th>
+  </thead>
+  {% for announcement in announcement_list %}
+      <tr>
+          <td> {{ announcement.dateAdded }} </td>
+          <td> {{ announcement.creator }} </td>
+          <td> {{ announcement.title }} </td>
+
+          <!-- if to convert internal topic codes to readable format -->
+          {% if announcement.topic == 'A' %}
+          <td> General </td>
+          {% elif announcement.topic == 'B' %}
+          <td> Social </td>
+          {% elif announcement.topic == 'C' %}
+          <td> Professional </td>
+          {% elif announcement.topic == 'D' %}
+          <td> Philanthropy </td>
+          {% elif announcement.topic == 'E' %}
+          <td> Recruitment </td>
+          {% elif announcement.topic == 'F' %}
+          <td> Social </td>
+          {% else %}
+          <td> New Member </td>
+          {% endif %}
+
+          <!-- if to convert internal type codes to readable format -->
+          {% if announcement.type == 'G' %}
+          <td> Normal </td>
+          {% else %}
+          <td class=text-danger> <strong> URGENT </strong> </td>
+          {% endif %}
+
+          <td> {{ announcement.message }} </td>
+      </tr>
+  {% endfor %}
+  </table>
+  {% else %}
+    <p>There are no announcements.</p>
+  {% endif %}
+
+</div>
 
 
-</div>-->
-
-
-<!-- {% if latest_question_list %}
-<ul>
-{% for question in latest_question_list %} -->
-	<!--<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>-->
-	<!-- <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-{% endfor %}
-</ul>
-
-{% else %}
-	<p>No polls are available. </p>
-{% endif %} -->
+</div>
 
 {% endblock %}

@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 from member.models import Profile
 # Create your models here.
@@ -18,16 +19,7 @@ class Announcement(models.Model):
 	topic = models.CharField(max_length=1, choices=TOPICS, default=GENERAL)
 	type = models.CharField(max_length=1, choices=TYPES, default=NORMAL)
 	message = models.TextField()
+	dateAdded = models.DateTimeField(auto_now_add=True)
 
-	ANNOUNCEMENT_STATUS = (
-        ('A', 'GENERAL'),
-        ('B', 'SOCIAL'),
-        ('C', 'PROFESSIONAL'),
-        ('D', 'PHILANTHROPY'),
-		('E', 'RECRUITMENT'),
-        ('F', 'NEWMEMBER'),
-        ('G', 'NORMAL'),
-        ('H', 'URGENT'),
-    )
-
-    #status= models.CharField(max_length=1, choices=ANNOUNCEMENT_STATUS, blank=True, default='A', help_text='Anouncemnent type')
+	def __str__(self):
+		return self.title
