@@ -4,7 +4,7 @@
 {% block content %}
     {% if user.profile %}
         {% include "member/single_detail.html" %}
-        <button href="{% url 'member:edit_profile' user.profile.id %}" class="btn btn-danger">Edit Info</button>
+        <a href="{% url 'member:edit_profile' user.profile.id %}" class="btn btn-danger">Edit Info</a>
     {% else %}
         <p>You are not logged in or you have no profile</p>
     {% endif %}
