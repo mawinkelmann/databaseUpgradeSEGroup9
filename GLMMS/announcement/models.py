@@ -1,4 +1,5 @@
 from django.db import models
+from django.conf import settings
 import datetime
 
 from member.models import Profile
@@ -14,7 +15,8 @@ class Announcement(models.Model):
 	URGENT = 'H'
 	TYPES = ((NORMAL, 'Normal'), (URGENT, 'Urgent'),)
 	TOPICS = ((GENERAL, 'General'), (SOCIAL,'Social'), (PROFESSIONAL, 'Professional'), (PHILANTHROPY, 'Philanthropy'), (RECRUITMENT, 'Recruitment'), (NEWMEMBER, 'New Member'),)
-	creator = models.ForeignKey(Profile, on_delete=models.CASCADE)
+										#Profile
+	creator = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 	title = models.CharField(max_length=63)
 	topic = models.CharField(max_length=1, choices=TOPICS, default=GENERAL)
 	type = models.CharField(max_length=1, choices=TYPES, default=NORMAL)

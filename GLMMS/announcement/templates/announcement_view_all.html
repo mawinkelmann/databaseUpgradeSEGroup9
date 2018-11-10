@@ -5,68 +5,38 @@
 
 {% load sorter %}
 
-<h1>Create Announcement</h1>
-<div>
-
-
-
-
-</div>
-
 <h1>Announcements</h1>
-<div>
 
-{% if announcement_list %}
-<table class='table-bordered table-striped table-condensed cf'>
-  <thead>
-      <th><a href="?{% url_replace request 'order_by' 'dateAdded' '-' %}">Date</a></th>
-      <th><a href="?{% url_replace request 'order_by' 'creator' '-' %}">Creator</a></th>
-      <th>Title</th>
-      <th><a href="?{% url_replace request 'order_by' 'topic' '-' %}">Topic</a></th>
-      <th><a href="?{% url_replace request 'order_by' 'type' '-' %}">Type</a></th>
-  		<th>Message</th>
-  </thead>
-  {% for announcement in announcement_list %}
-      <tr>
-          <td> {{ announcement.dateAdded }} </td>
-          <td> {{ announcement.creator }} </td>
-          <td> {{ announcement.title }} </td>
+  {% for announcements in announcements %}
+    <h2><a href="">{{ announcements.title }}</a></h2>
+    <p>Date: {{ announcements.dateAdded }}</p>
 
-          <!-- if to convert internal topic codes to readable format -->
-          {% if announcement.topic == 'A' %}
-          <td> General </td>
-          {% elif announcement.topic == 'B' %}
-          <td> Social </td>
-          {% elif announcement.topic == 'C' %}
-          <td> Professional </td>
-          {% elif announcement.topic == 'D' %}
-          <td> Philanthropy </td>
-          {% elif announcement.topic == 'E' %}
-          <td> Recruitment </td>
-          {% elif announcement.topic == 'F' %}
-          <td> Social </td>
-          {% else %}
-          <td> New Member </td>
-          {% endif %}
+    <!-- if to convert internal topic codes to readable format -->
+    {% if announcements.topic == 'A' %}
+    <p> Topic: General </p>
+    {% elif announcements.topic == 'B' %}
+    <p> Topic: Social </p>
+    {% elif announcements.topic == 'C' %}
+    <p> Topic: Professional </p>
+    {% elif announcements.topic == 'D' %}
+    <p> Topic: Philanthropy </p>
+    {% elif announcements.topic == 'E' %}
+    <p> Topic: Recruitment </p>
+    {% elif announcements.topic == 'F' %}
+    <p> Topic: Social </p>
+    {% else %}
+    <p> Topic: New Member </p>
+    {% endif %}
 
-          <!-- if to convert internal type codes to readable format -->
-          {% if announcement.type == 'G' %}
-          <td> Normal </td>
-          {% else %}
-          <td class=text-danger> <strong> URGENT </strong> </td>
-          {% endif %}
+    <!-- if to convert internal type codes to readable format -->
+    {% if announcements.type == 'G' %}
+    <p> Type: Normal </p>
+    {% else %}
+    <p> Type: <strong class=text-danger> URGENT </strong> </p>
+    {% endif %}
 
-          <td> {{ announcement.message }} </td>
-      </tr>
+    <p>Creator: {{ announcements.creator }}</p>
+    <p>{{ announcements.message|linebreaksbr }}</p>
   {% endfor %}
-  </table>
-  {% else %}
-    <p>There are no announcements.</p>
-  {% endif %}
-
-</div>
-
-
-</div>
 
 {% endblock %}
