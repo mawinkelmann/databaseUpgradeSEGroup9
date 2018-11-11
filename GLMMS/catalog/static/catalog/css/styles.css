@@ -18,3 +18,8 @@
 .links{
   max-width: 65%;
 }
+
+#announcement{
+  width: 65%;
+  border-bottom: 1px solid black;
+}

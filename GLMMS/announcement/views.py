@@ -13,4 +13,4 @@ from .models import Announcement
 def AnnouncementsView(request):
 
     announcements = Announcement.objects.order_by('-dateAdded')
-    return render(request, 'announcement_view_all.html', {'announcements': announcements})
+    return render(request, 'announcement/announcement_view_all.html', {'announcements': announcements})

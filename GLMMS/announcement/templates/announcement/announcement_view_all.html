@@ -8,6 +8,7 @@
 <h1>Announcements</h1>
 
   {% for announcements in announcements %}
+  <div id="announcement">
     <h2><a href="">{{ announcements.title }}</a></h2>
     <p>Date: {{ announcements.dateAdded }}</p>
 
@@ -37,6 +38,7 @@
 
     <p>Creator: {{ announcements.creator }}</p>
     <p>{{ announcements.message|linebreaksbr }}</p>
+  </div>
   {% endfor %}
 
 {% endblock %}
