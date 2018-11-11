@@ -1,0 +1,35 @@
+{% extends 'common/base.html' %}
+
+{% block content %}
+    <div>
+      <h2>{{ announcement.title }}</h2>
+      <p>Date: {{ announcement.dateAdded }}</p>
+      <p>Creator: {{ announcement.creator }}</p>
+
+      <!-- if to convert internal topic codes to readable format -->
+      {% if announcement.topic == 'A' %}
+      <p> Topic: General </p>
+      {% elif announcement.topic == 'B' %}
+      <p> Topic: Social </p>
+      {% elif announcement.topic == 'C' %}
+      <p> Topic: Professional </p>
+      {% elif announcement.topic == 'D' %}
+      <p> Topic: Philanthropy </p>
+      {% elif announcement.topic == 'E' %}
+      <p> Topic: Recruitment </p>
+      {% elif announcement.topic == 'F' %}
+      <p> Topic: Social </p>
+      {% else %}
+      <p> Topic: New Member </p>
+      {% endif %}
+
+      <!-- if to convert internal type codes to readable format -->
+      {% if announcement.type == 'G' %}
+      <p> Type: Normal </p>
+      {% else %}
+      <p> Type: <strong class=text-danger> URGENT </strong> </p>
+      {% endif %}
+
+      <p>Message: {{ announcement.message|linebreaksbr }}</p>
+    </div>
+{% endblock %}
