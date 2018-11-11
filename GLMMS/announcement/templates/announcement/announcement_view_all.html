@@ -5,8 +5,9 @@
 
 {% load sorter %}
 
-<h1>Announcements</h1>
+<a class="btn btn-primary" href="{% url 'announcement:announcement_new' %}">New</a>
 
+<h1>Announcements</h1>
   {% for announcements in announcements %}
   <div id="announcement">
     <h2><a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}">{{ announcements.title }}</a></h2>
