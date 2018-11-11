@@ -1,0 +1,42 @@
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+
+{% load sorter %}
+
+<h1>Announcements</h1>
+
+  {% for announcements in announcements %}
+    <h2><a href="">{{ announcements.title }}</a></h2>
+    <p>Date: {{ announcements.dateAdded }}</p>
+
+    <!-- if to convert internal topic codes to readable format -->
+    {% if announcements.topic == 'A' %}
+    <p> Topic: General </p>
+    {% elif announcements.topic == 'B' %}
+    <p> Topic: Social </p>
+    {% elif announcements.topic == 'C' %}
+    <p> Topic: Professional </p>
+    {% elif announcements.topic == 'D' %}
+    <p> Topic: Philanthropy </p>
+    {% elif announcements.topic == 'E' %}
+    <p> Topic: Recruitment </p>
+    {% elif announcements.topic == 'F' %}
+    <p> Topic: Social </p>
+    {% else %}
+    <p> Topic: New Member </p>
+    {% endif %}
+
+    <!-- if to convert internal type codes to readable format -->
+    {% if announcements.type == 'G' %}
+    <p> Type: Normal </p>
+    {% else %}
+    <p> Type: <strong class=text-danger> URGENT </strong> </p>
+    {% endif %}
+
+    <p>Creator: {{ announcements.creator }}</p>
+    <p>{{ announcements.message|linebreaksbr }}</p>
+  {% endfor %}
+
+{% endblock %}

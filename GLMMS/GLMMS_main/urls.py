@@ -1,4 +1,4 @@
-"""locallibrary URL Configuration
+"""GLMMS URL Configuration
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/2.0/topics/http/urls/
 Examples:
@@ -51,7 +51,7 @@ urlpatterns += [
 #add media file support
 from . import settings as mysettings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
- 
- 
+
+
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(mysettings.MEDIA_URL, document_root=mysettings.MEDIA_ROOT)
