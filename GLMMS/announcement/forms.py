@@ -7,4 +7,4 @@ class AnnouncementForm(forms.ModelForm):
 	'''This class provides an announcement creation form.'''
 	class Meta:
 		model = Announcement
-		fields = ['TYPES', 'TOPICS', 'title', 'message']
+		fields = ['type', 'topic', 'title', 'message']
