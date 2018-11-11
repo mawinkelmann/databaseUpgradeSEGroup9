@@ -11,6 +11,9 @@
   {% for announcements in announcements %}
   <div id="announcement">
     <h2><a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}">{{ announcements.title }}</a></h2>
+    {% if announcements.type == 'H' %}
+      <p><strong class=text-danger> URGENT </strong> </p>
+    {% endif %}
     <p>Date: {{ announcements.dateAdded }}</p>
     <p>Creator: {{ announcements.creator }}</p>
   </div>
