@@ -1,28 +1,35 @@
 {# this file will print a table containing the fields and values for each profile object given. The context needs to contain `fields` which is a list of verbose field names and results which is a zipped list of profiles and serialized profiles #}
 
+
 {% load static %}
 {% if results %}
 <h1>Number of Results: {{ results|length }}</h1>
-<table class='table-bordered table-striped table-condensed cf'>
-<thead>
-    <th>Username</th>
-    <th>Name</th>
-    <th>Email</th>
-{% for field_name in fields %}
-		<th>{{ field_name }}</th>
-{% endfor %}
-	</thead>
-{% for profile, data in results %}
-    <tr>
-        <td>{{ profile.user.username }}</td>
-        <td>{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
-        <td>{{ profile.user.email }}</td>
-        {% for field, value in data.fields.items %}
-            <td> {{ value|default:"N/A" }}</td>
-        {% endfor %}
-    </tr>
-{% endfor %}
-</table>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="thead-light">
+            <tr>
+            <th scope="col">Username</th>
+            <th scope="col">Name</th>
+            <th scope="col">Email</th>
+            {% for field_name in fields %}
+                <th scope="col">{{ field_name }}</th>
+            {% endfor %}
+            </tr>
+        </thead>
+        {% for profile, data in results %}
+        <tbody>
+            <tr>
+                <td scope="row">{{ profile.user.username }}</td>
+                <td scope="row">{{ profile.user.first_name }} {{ profile.user.last_name }}</td>
+                <td scope="row">{{ profile.user.email }}</td>
+                {% for field, value in data.fields.items %}
+                    <td scope="row">{{ value|default:"N/A" }}</td>
+                {% endfor %}
+            </tr>
+        </tbody>
+    {% endfor %}
+    </table>
+</div>
 {% else %}
 <h1>Number of Results: 0</h1>
 {% endif %}

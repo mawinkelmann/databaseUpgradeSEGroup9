@@ -3,12 +3,14 @@
     padding: 0;
     list-style: none;
 }
+
 #loginDropdown {
     list-style-type: none;
 }
 
 .list-group-flush .list-group-item:first-child {
-  border-top: 0; }
+  border-top: 0; 
+}
 
 .list-group-item {
   border-left: 0;
@@ -22,4 +24,9 @@
 #announcement{
   width: 65%;
   border-bottom: 1px solid black;
+}
+
+
+body {
+  background-color: #e6e6e6;
 }
