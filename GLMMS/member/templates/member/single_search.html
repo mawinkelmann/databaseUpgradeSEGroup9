@@ -14,10 +14,21 @@
 
 <form action="{% url 'member:single_search' %}" method="POST">
 	{% csrf_token %}
-	<ul>
-		{{ form|crispy }}
-	</ul>
-	<input type="submit" value="Search">
+	<div class="row">
+		<div class="col-lg-6">
+			{{ form.actives_choice|as_crispy_field }}
+		</div>
+		<div class="col-lg-6">
+			{{ form.alumni_choice|as_crispy_field }}
+		</div>
+		<div class="col-lg-6">
+			{{ form.newmembers_choice|as_crispy_field }}
+		</div>
+		<div class="col-lg-6">
+			{{ form.inactives_choice|as_crispy_field }}
+		</div>
+	</div>
+	<input class="btn btn-danger" type="submit" value="Search">
 </form>
 {% if profile %}
 {% include "member/single_detail.html" %}

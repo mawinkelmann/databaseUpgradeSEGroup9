@@ -2,26 +2,94 @@
 
 {% extends "common/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 {% if user.profile %}
-	{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
+{% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
-	<h1>Member Edit Info</h1>
-	<hr>
-	<h4>Edit your information and click save:</h4>
+<h1>Member Edit Info</h1>
+<hr>
+<h4>Edit your information and click save:</h4>
 
-	<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST" enctype='multipart/form-data'>
+<form action="{% url 'member:edit_profile' user.profile.id %}" method="POST" enctype='multipart/form-data'>
 	{% csrf_token %}
-	<ul>
-		{{ user_form.as_ul }}
-		{{ profile_form.as_ul }}
-	</ul>
-	<input type="submit" value="Save">
-	</form>
-	<hr>
+	<div class="row">
+		<div class="col-sm-12 col-lg-4">
+			{{ user_form.first_name|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-4">
+			{{ user_form.last_name|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-4">
+			{{ user_form.email|as_crispy_field }}
+		</div>
+	</div>
+	<div class="row">
+		
+		<div class="col-sm-12 col-lg-12">
+			{{ profile_form.bio|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-4">
+			{{ profile_form.phone|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-8">
+			{{ profile_form.address|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.pledge_class|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.major|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.major2|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.emphasis|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.shirt_size|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.member_status|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.grad_semester|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.grad_year|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-12">
+			{{ profile_form.linkedin_profile|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.cumulative_gpa|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.last_sem_gpa|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.last_update|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-3">
+			{{ profile_form.birth_date|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-6">
+			{{ profile_form.pledge_father|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-6">
+			{{ profile_form.cell_carrier_id|as_crispy_field }}
+		</div>
+		<div class="col-sm-12 col-lg-12">
+			{{ profile_form.photo|as_crispy_field }}
+		</div>
+	</div>
+	<input class="btn btn-success" type="submit" value="Save">
+</form>
+<hr>
 {% else %}
-	<p>You are not logged in or you have no profile</p>
+<p>You are not logged in or you have no profile</p>
 {% endif %}
 
 {% endblock %}

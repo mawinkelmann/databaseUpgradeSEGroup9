@@ -2,20 +2,31 @@
 
 {% extends "common/base.html" %}
 {% load static %}
+{% load crispy_forms_tags %}
 
 {% block content %}
 {% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
 <h1>Multi-Member Search</h1>
+<hr>
 <h4>Choose your search criteria from the dropdown lists below:</h4>
 {% if error_message %}<p><strong>{{ error_message }} </strong></p>{% endif %}
 
 <form action="{% url 'member:multi_search' %}" method="POST">
-{% csrf_token %}
-<ul>
-{{ form.as_ul }}
-</ul>
-<input type="submit" value="Search">
+	{% csrf_token %}
+	<div class="row">
+		<div class="col-sm-12 col-lg-12">
+			{{ form.status_choice|as_crispy_field }}
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			{{ form.field_choice|as_crispy_field }}
+		</div>
+		<div class="col-sm-6 col-lg-6">
+			{{ form.order_choice|as_crispy_field }}
+		</div>
+		<div class="col-lg-4"></div>
+	</div>
+	<input class="btn btn-danger" type="submit" value="Search">
 </form>
 <hr>
 {% if fields %}
