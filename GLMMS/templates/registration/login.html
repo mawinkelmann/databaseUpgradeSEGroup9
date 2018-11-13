@@ -1,23 +1,24 @@
 {% extends "common/base.html" %}
 
 {% block content %}
+{% load crispy_forms_tags %}
 
 {% if form.errors %}
 <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
 
 {% if next %}
-    {% if user.is_authenticated %}
-    <p>Your account doesn't have access to this page. To proceed,
+{% if user.is_authenticated %}
+<p>Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
-    {% else %}
-    <p>Please login to see this page.</p>
-    {% endif %}
+{% else %}
+<p>Please login to see this page.</p>
+{% endif %}
 {% endif %}
 
 <form method="post" action="{% url 'login' %}">
-{% csrf_token %}
-<!-- <div class="col-sm-4 input-group ">
+    {% csrf_token %}
+    <!-- <div class="col-sm-4 input-group ">
   <span class="input-group-addon" id="sizing-addon2">@</span>
   <input type="text" class="form-control" placeholder="Username" aria-describedby="sizing-addon1">
 </div>
@@ -26,19 +27,19 @@
   <span class="input-group-addon" id="sizing-addon2">@</span>
   <input type="text" class="form-control" placeholder="Password" aria-describedby="sizing-addon1">
 </div> -->
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
+    <div class="row">
+        <div class="col-sm-12 col-lg-6">
+            {{ form.username|as_crispy_field }}
+        </div>
+        <div class="col-lg-6"></div>
+        <div class="col-sm-12 col-lg-6">
+            {{ form.password|as_crispy_field }}
+        </div>
+        <div class="col-lg-6"></div>
+    </div>
+    <input class="btn btn-danger" type="submit" value="Login">
+    <input type="hidden" name="next" value="{{ next }}" />
 </form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
