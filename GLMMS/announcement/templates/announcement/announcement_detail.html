@@ -1,3 +1,5 @@
+{# This template displays a detailed view of a selected announcement. #}
+
 {% extends 'common/base.html' %}
 
 {% block content %}
@@ -31,6 +33,10 @@
       {% endif %}
 
       <p>Message: {{ announcement.message|linebreaksbr }}</p>
-      <a class="btn btn-default" href="{% url 'announcement:announcement_edit' pk=announcement.pk %}">Edit</a>
+
+      {% if request.user == announcement.creator %}
+        <a class="btn btn-default" href="{% url 'announcement:announcement_edit' pk=announcement.pk %}">Edit</a>
+      {% endif %}
+
     </div>
 {% endblock %}
