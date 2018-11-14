@@ -7,7 +7,11 @@
 
 {% load sorter %}
 
-<a class="btn btn-primary" href="{% url 'announcement:announcement_new' %}">Create New</a>
+<!-- if statement to check if current user has permissions in the announcement app to add a new announcement
+     currently this is checking broadly for ANY permissions; need to make it more specific to an ADD permission -->
+{% if perms.announcement %}
+  <a class="btn btn-primary" href="{% url 'announcement:announcement_new' %}">Create New</a>
+{% endif %}
 
 <h1>Announcements</h1>
   {% for announcements in announcements %}
