@@ -4,12 +4,12 @@
 {% load crispy_forms_tags %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p class="errorMessage">Your username and password didn't match. Please try again.</p>
 {% endif %}
 
 {% if next %}
 {% if user.is_authenticated %}
-<p>Your account doesn't have access to this page. To proceed,
+<p class="errorMessage"> Your account doesn't have access to this page. To proceed,
     please login with an account that has access.</p>
 {% else %}
 <p>Please login to see this page.</p>

@@ -46,8 +46,8 @@ class MultiSearchForm(forms.Form):
 		#remove everything option from the ordering cause that doesnt make sense
 		fields.remove((MultiSearchForm.ALL_MEMBERS, 'Everything'))
 		fields.insert(0,('user__username', 'Username'))
-		fields.insert(1,('user__last_name', 'Username'))
-		fields.insert(2,('user__first_name', 'Username'))
+		fields.insert(1,('user__last_name', 'Last Name'))
+		fields.insert(2,('user__first_name', 'First Name'))
 		self.fields['order_choice'] = forms.MultipleChoiceField(required=True, choices=fields, initial='user__username', label="How to sort the results?")
 
 class ProfileEditForm(forms.ModelForm):
