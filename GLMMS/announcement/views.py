@@ -5,6 +5,7 @@ from django.views import generic
 from django.utils import timezone
 from django import forms
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from .models import Announcement
 from .forms import AnnouncementForm
@@ -13,8 +14,11 @@ from .forms import AnnouncementForm
 
 @login_required
 def AnnouncementsView(request):
+    announcements_list = Announcement.objects.order_by('-dateAdded')
+    paginator = Paginator(announcements_list, 5) # Show 5 announcements per page
 
-    announcements = Announcement.objects.order_by('-dateAdded')
+    page = request.GET.get('page')
+    announcements = paginator.get_page(page)
     return render(request, 'announcement/announcement_view_all.html', {'announcements': announcements})
 
 @login_required
