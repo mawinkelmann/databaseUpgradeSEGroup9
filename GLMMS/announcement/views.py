@@ -10,7 +10,6 @@ from .forms import AnnouncementForm
 
 # Create your views here.
 
-
 def AnnouncementsView(request):
 
     announcements = Announcement.objects.order_by('-dateAdded')
