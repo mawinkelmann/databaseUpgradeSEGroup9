@@ -1,12 +1,26 @@
 {# This template displays an edit form for editable fields of an announcement object. Requires a `AnnouncementForm` #}
 
 {% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <h2>New announcement</h2>
+    <h2>New Announcement</h2>
     <form method="POST" class="post-form">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Save</button>
+        <div class="row">
+            <div class="col-sm-6 col-lg-4">
+                {{ form.type|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                {{ form.topic|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                {{ form.message|as_crispy_field }}
+            </div>
+        </div>
+        <button class="btn btn-danger" type="submit">Save</button>
     </form>
 {% endblock %}

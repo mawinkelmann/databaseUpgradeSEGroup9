@@ -7,14 +7,15 @@
 
 {% load sorter %}
 
-<a class="btn btn-primary" href="{% url 'announcement:announcement_new' %}">Create New</a>
+<a class="btn btn-danger" href="{% url 'announcement:announcement_new' %}">Create New</a>
 
 <h1>Announcements</h1>
   {% for announcements in announcements %}
   <div id="announcement">
-    <h2><a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}">{{ announcements.title }}</a></h2>
     {% if announcements.type == 'H' %}
-      <h4><strong class=text-danger> URGENT </strong> </h4>
+      <h2><a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}"><strong class="text-danger">★ {{ announcements.title }}</strong></a></h2>
+    {% else %}
+      <h2><a class="text-danger" href="{% url 'announcement:announcement_detail' pk=announcements.pk %}">{{ announcements.title }}</a></h2>
     {% endif %}
     <p>Date: {{ announcements.dateAdded }}</p>
     <p>Creator: {{ announcements.creator }}</p>
