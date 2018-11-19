@@ -7,20 +7,28 @@
 
 {% load sorter %}
 
-<a class="btn btn-danger" href="{% url 'announcement:announcement_new' %}">Create New</a>
 
 <h1>Announcements</h1>
-  {% for announcements in announcements %}
-  <div id="announcement">
-    {% if announcements.type == 'H' %}
-      <h2><a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}"><strong class="text-danger">★ {{ announcements.title }}</strong></a></h2>
-    {% else %}
-      <h2><a class="text-danger" href="{% url 'announcement:announcement_detail' pk=announcements.pk %}">{{ announcements.title }}</a></h2>
-    {% endif %}
-    <p>Date: {{ announcements.dateAdded }}</p>
-    <p>Creator: {{ announcements.creator }}</p>
+<a class="btn btn-danger" href="{% url 'announcement:announcement_new' %}">Create New</a>
+
+<div class="row">
+    {% for announcements in announcements %}
+    <div class="col-sm-12 col-lg-6">
+      <div class="card">
+        {% if announcements.type == 'H' %}
+        <h5 class="card-header">★ {{ announcements.title }} ★</h5>
+        {% else %}
+        <h5 class="card-header">{{ announcements.title }}</h5>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">{{ announcements.creator }}</h5>
+          <p class="card-text">{{ announcements.dateAdded }}</p>
+          <a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}" class="btn btn-danger">Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
   </div>
-  {% endfor %}
 
   <div class="pagination">
     <span class="step-links">

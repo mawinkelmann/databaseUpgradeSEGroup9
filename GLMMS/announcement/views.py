@@ -15,7 +15,7 @@ from .forms import AnnouncementForm
 @login_required
 def AnnouncementsView(request):
     announcements_list = Announcement.objects.order_by('-dateAdded')
-    paginator = Paginator(announcements_list, 5) # Show 5 announcements per page
+    paginator = Paginator(announcements_list, 6) # Show 5 announcements per page
 
     page = request.GET.get('page')
     announcements = paginator.get_page(page)
