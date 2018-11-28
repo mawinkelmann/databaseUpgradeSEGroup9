@@ -14,7 +14,7 @@
 <div class="row">
     {% for announcements in announcements %}
     <div class="col-sm-12 col-lg-6">
-      <div class="card">
+      <div class="card" style="margin-bottom: .25rem; margin-top: .25rem">
         {% if announcements.type == 'H' %}
         <h5 class="card-header">★ {{ announcements.title }} ★</h5>
         {% else %}
