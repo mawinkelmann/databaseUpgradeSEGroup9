@@ -6,6 +6,7 @@ from django.utils import timezone
 from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core.mail import send_mail
 
 from .models import Announcement
 from .forms import AnnouncementForm
@@ -29,6 +30,8 @@ def announcement_detail(request, pk):
 
 @login_required
 def announcement_new(request):
+    member_list = Profile.objects.filter(member_status="Active")
+
     if request.method == "POST":
         form = AnnouncementForm(request.POST)
         if form.is_valid():
@@ -51,6 +54,7 @@ def announcement_edit(request, pk):
             announcement.creator = request.user
             announcement.dateAdded = timezone.now()
             announcement.save()
+            #send_mail('subject', 'body of the message', 'sender@example.com', ['receiver1@example.com', 'receiver2@example.com'])
             return redirect('announcement:announcement_detail', pk=announcement.pk)
     else:
         form = AnnouncementForm(instance=announcement)
