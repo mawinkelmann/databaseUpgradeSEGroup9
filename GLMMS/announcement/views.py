@@ -46,7 +46,12 @@ def announcement_new(request):
                 subject = form.cleaned_data['title']
                 message = form.cleaned_data['message']
                 send_mail_from = "sender"
-                recipients = ['jbpulis@yahoo.com', 'sender']
+                #recipients = ['jbpulis@yahoo.com']
+                recipients = []
+                for profile in Profile.objects.filter(member_status="A"):
+                    recipients.append(profile.phone + "@" + profile.cell_carrier_id.sms_address)
+                #for user in User.objects.all():
+                #    recipients.append(user.email)
 
                 send_mail(subject, message, sender, recipients)
             return redirect('announcement:announcement_detail', pk=announcement.pk)
