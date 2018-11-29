@@ -10,6 +10,8 @@ from django.core.mail import send_mail
 
 from .models import Announcement
 from .forms import AnnouncementForm
+from member.models import Profile
+from django.contrib.auth.models import User
 
 # Create your views here.
 
@@ -30,16 +32,26 @@ def announcement_detail(request, pk):
 
 @login_required
 def announcement_new(request):
-    member_list = Profile.objects.filter(member_status="A")
-    
+    #member_list = Profile.objects.filter(member_status="A")
+    #print(member_list)
 
     if request.method == "POST":
         form = AnnouncementForm(request.POST)
         if form.is_valid():
             announcement = form.save(commit=False)
             announcement.creator = request.user
+            sender = announcement.creator.email
             #post.dateAdded = timezone.now()
             announcement.save()
+            if announcement.type == "H":
+                subject = form.cleaned_data['title']
+                message = form.cleaned_data['message']
+                send_mail_from = "sender"
+                # this sender refers to person who the email is from
+                # as indicated in the contact form
+                recipients = ['jbpulis@yahoo.com', 'sender']
+
+                send_mail(subject, message, sender, recipients)
             return redirect('announcement:announcement_detail', pk=announcement.pk)
     else:
         form = AnnouncementForm()
@@ -55,7 +67,6 @@ def announcement_edit(request, pk):
             announcement.creator = request.user
             announcement.dateAdded = timezone.now()
             announcement.save()
-            #send_mail('subject', 'body of the message', 'sender@example.com', ['receiver1@example.com', 'receiver2@example.com'])
             return redirect('announcement:announcement_detail', pk=announcement.pk)
     else:
         form = AnnouncementForm(instance=announcement)
