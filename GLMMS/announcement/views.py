@@ -41,14 +41,11 @@ def announcement_new(request):
             announcement = form.save(commit=False)
             announcement.creator = request.user
             sender = announcement.creator.email
-            #post.dateAdded = timezone.now()
             announcement.save()
             if announcement.type == "H":
                 subject = form.cleaned_data['title']
                 message = form.cleaned_data['message']
                 send_mail_from = "sender"
-                # this sender refers to person who the email is from
-                # as indicated in the contact form
                 recipients = ['jbpulis@yahoo.com', 'sender']
 
                 send_mail(subject, message, sender, recipients)
