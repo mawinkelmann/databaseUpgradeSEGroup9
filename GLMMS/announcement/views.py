@@ -46,7 +46,7 @@ def announcement_new(request):
                 subject = form.cleaned_data['title']
                 message = form.cleaned_data['message']
                 send_mail_from = "sender"
-                #recipients = ['jbpulis@yahoo.com']
+
                 recipients = []
                 for profile in Profile.objects.filter(member_status="A"):
                     recipients.append(profile.phone + "@" + profile.cell_carrier_id.sms_address)
