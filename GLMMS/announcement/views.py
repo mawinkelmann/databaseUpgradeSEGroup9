@@ -30,7 +30,8 @@ def announcement_detail(request, pk):
 
 @login_required
 def announcement_new(request):
-    member_list = Profile.objects.filter(member_status="Active")
+    member_list = Profile.objects.filter(member_status="A")
+    
 
     if request.method == "POST":
         form = AnnouncementForm(request.POST)
