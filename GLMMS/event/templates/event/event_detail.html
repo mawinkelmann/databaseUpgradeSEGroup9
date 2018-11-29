@@ -1,0 +1,48 @@
+{# This template displays a detailed view of a selected event. #}
+
+{% extends 'common/base.html' %}
+
+{% block content %}
+  {% if message %}<p class='error'><strong>{{ message }} </strong></p>{% endif %}
+    <div class="card">
+      <h2 class="card-header">{{ event.title }}</h2>
+      <div class="card-body">
+        <h5 class="class-title">
+            {% if event.topic == 'A' %}
+            General Event 
+            {% elif event.topic == 'B' %}
+            Social Event 
+            {% elif event.topic == 'C' %}
+            Professional Event 
+            {% elif event.topic == 'D' %}
+            Philanthropy Event 
+            {% elif event.topic == 'E' %}
+            Recruitment Event 
+            {% elif event.topic == 'F' %}
+            Social Event 
+            {% elif event.topic == 'G' %}
+            Brotherhood Development Event
+            {% else %}
+            New Member Event 
+            {% endif %}
+            from {{ event.start_time }} to {{ event.end_time }}
+        </h5>
+        <div class="class-text">
+          <p>{{ event.description|linebreaksbr }}</p>
+          
+          <!-- if to check if the user that created the event is the one viewing it and allowing them to edit the post.
+               request.user is comparing a User model to event.creator (which is also a User model) -->
+          <p> Brothers Attending </p>
+          <p>Location: {{ event.address }}, {{ event.city }}, {{ event.state }} {{ event.zipcode }}</p>
+          <p>Created by {{ event.creator }} on {{ event.dateAdded }}</p>
+          {% if request.user == event.creator %}
+            <a class="btn btn-danger" href="{% url 'event:event_edit' pk=event.pk %}">Edit</a>
+          {% endif %}
+            <a class="btn btn-danger" href="{% url 'event:EventsView' %}">Back</a>
+            <a class="btn btn-danger" href="#">Show RSVPs</a>
+        </div>
+      </div>
+
+
+    </div>
+{% endblock %}

@@ -1,0 +1,46 @@
+{# This template displays an edit form for editable fields of an event object. Requires a `EventForm` #}
+
+{% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h2>New Event</h2>
+    <form method="POST" class="post-form">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-sm-12 col-lg-8">
+                {{ form.topic|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                {{ form.title|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-8">
+                {{ form.description|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-12"></div>
+            <div class="col-sm-6 col-lg-4">
+                {{ form.start_time|as_crispy_field }}
+            </div>
+            <div class="col-sm-6 col-lg-4">
+                {{ form.end_time|as_crispy_field }}
+            </div>
+            <div class="col-sm-8 col-lg-5">
+                {{ form.address|as_crispy_field }}
+            </div>
+            <div class="col-sm-4 col-lg-3">
+                {{ form.city|as_crispy_field }}
+            </div>
+            <div class="col-sm-12 col-lg-12"></div>
+            <div class="col-sm-6 col-lg-4">
+                {{ form.state|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 col-lg-2">
+                {{ form.zipcode|as_crispy_field }}
+            </div>
+            <div class="col-sm-3 col-lg-2">
+                {{ form.is_public|as_crispy_field }}
+            </div>
+        </div>
+        <button class="btn btn-danger" type="submit">Save</button>
+    </form>
+{% endblock %}

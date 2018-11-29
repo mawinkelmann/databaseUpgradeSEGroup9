@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
 	'member.apps.MemberConfig',
 	'announcement.apps.AnnouncementConfig',
+    'event.apps.EventConfig',
     'crispy_forms',
 ]
 
