@@ -1,0 +1,76 @@
+{# This template displays a list of all events. #}
+
+{% extends "common/base.html" %}
+{% load static %}
+
+{% block content %}
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% load sorter %}
+
+<h1>Events</h1>
+<a class="btn btn-danger" href="{% url 'event:event_new' %}">Create New</a>
+
+<div class="row">
+    {% for events in events %}
+    <div class="col-sm-12 col-lg-6">
+      <div class="card" style="margin-bottom: .25rem; margin-top: .25rem">
+        {% if events.is_public == True %}
+        <h5 class="card-header">★ {{ events.title }} ★</h5>
+        {% else %}
+        <h5 class="card-header">{{ events.title }}</h5>
+        {% endif %}
+        <div class="card-body">
+          <h5 class="card-title">
+            {% if events.topic == 'A' %}
+            General Event
+            {% elif events.topic == 'B' %}
+            Social Event
+            {% elif events.topic == 'C' %}
+            Professional Event
+            {% elif events.topic == 'D' %}
+            Philanthropy Event
+            {% elif events.topic == 'E' %}
+            Recruitment Event
+            {% elif events.topic == 'F' %}
+            Social Event
+            {% elif events.topic == 'G' %}
+            Brotherhood Development Event
+            {% else %}
+            New Member Event
+            {% endif %}
+          </h5>
+          <p class="card-text">Starts: {{ events.start_time }}</p>
+          <p class="card-text">Ends: {{ events.end_time }}</p>
+          <a href="{% url 'event:event_detail' pk=events.pk %}" class="btn btn-danger">Details</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="pagination">
+    <span class="step-links">
+        {% if events.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ events.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ events.number }} of {{ events.paginator.num_pages }}
+        </span>
+
+        {% if events.has_next %}
+            <a href="?page={{ events.next_page_number }}">next</a>
+            <a href="?page={{ events.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+  </div>
+
+
+{% endblock %}
