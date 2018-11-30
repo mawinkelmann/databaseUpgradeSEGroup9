@@ -4,9 +4,14 @@
 {% load static %}
 
 {% block content %}
-
+{% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
 {% load sorter %}
-
 
 <h1>Events</h1>
 <a class="btn btn-danger" href="{% url 'event:event_new' %}">Create New</a>

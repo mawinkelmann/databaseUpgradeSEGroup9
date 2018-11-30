@@ -40,3 +40,9 @@ class EventForm(forms.ModelForm):
         labels = {
             'is_public': ('Public Event?'),
         }
+
+class NotificationForm(forms.Form):
+    subject = forms.CharField(label='Message Subject', max_length=127)
+    message = forms.CharField(widget=forms.Textarea)
+    #sender = forms.EmailField()
+    type = forms.BooleanField(label="Check to send as a text message. Leave unchecked to send as an email.", required=False)

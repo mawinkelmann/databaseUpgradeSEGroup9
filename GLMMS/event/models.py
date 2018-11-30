@@ -25,7 +25,7 @@ class Event(models.Model):
 	dateAdded = models.DateTimeField(auto_now_add=True)
 	start_time = models.DateTimeField()
 	end_time = models.DateTimeField()
-	rsvps = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Organization_Involvement')
+	rsvps = models.ManyToManyField(settings.AUTH_USER_MODEL, through='Event_RSVPs', related_name='member_rsvps')
 
 	def __str__(self):
 		return self.title

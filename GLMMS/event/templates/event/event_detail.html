@@ -1,9 +1,16 @@
 {# This template displays a detailed view of a selected event. #}
 
 {% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-  {% if message %}<p class='error'><strong>{{ message }} </strong></p>{% endif %}
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
     <div class="card">
       <h2 class="card-header">{{ event.title }}</h2>
       <div class="card-body">
@@ -32,17 +39,49 @@
           
           <!-- if to check if the user that created the event is the one viewing it and allowing them to edit the post.
                request.user is comparing a User model to event.creator (which is also a User model) -->
-          <p> Brothers Attending </p>
+          <p>{{ num_rsvps }} Brothers are attending </p>
+          <p class="collapse" id="collapseRSVP"> 
+            {% for rsvp in rsvps %}
+              {% if rsvp.member.first_name and rsvp.member.last_name %}
+                {{ rsvp.member.first_name }} {{ rsvp.member.last_name }}, 
+              {% else %}
+                {{ rsvp.member.username }}
+              {% endif %}
+            {% endfor %}
+          </p>
           <p>Location: {{ event.address }}, {{ event.city }}, {{ event.state }} {{ event.zipcode }}</p>
           <p>Created by {{ event.creator }} on {{ event.dateAdded }}</p>
+            <a class="btn btn-primary" href="{% url 'event:EventsView' %}">Back</a>
           {% if request.user == event.creator %}
             <a class="btn btn-danger" href="{% url 'event:event_edit' pk=event.pk %}">Edit</a>
+            <a class="btn btn-danger" href="{% url 'event:event_delete' pk=event.pk %}">Delete</a>
+            <a class="btn btn-danger" data-toggle="collapse" href="#collapseNotify" role="button">Notify RSVPs</a>
           {% endif %}
-            <a class="btn btn-danger" href="{% url 'event:EventsView' %}">Back</a>
-            <a class="btn btn-danger" href="#">Show RSVPs</a>
+            <a class="btn btn-danger" href="{% url 'event:event_rsvp' pk=event.pk %}">RSVP to Event</a>
+            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRSVP"  {% if num_rsvps == 0 %} disabled {% endif %}>Show RSVPs</button>
+          </div>
+      </div>
+      <div class="collapse" id="collapseNotify">
+        <div class="card">
+          <h2 class="card-header">Create your Message</h2>
+          <div class="card-body">
+            <form action="{% url 'event:event_notify' pk=event.pk %}" method="POST" class="post-form">
+              {% csrf_token %}
+              <div class="row">
+                <div class="col-sm-12 col-lg-8">
+                    {{ form.subject|as_crispy_field }}
+                </div>
+                <div class="col-sm-12 col-lg-8">
+                    {{ form.message|as_crispy_field }}
+                </div>
+                <div class="col-sm-12 col-lg-8">
+                    {{ form.type|as_crispy_field }}
+                </div>
+              </div>
+              <button class="btn btn-danger" type="submit">Send Message</button>
+            </form>
+          </div>
         </div>
       </div>
-
-
     </div>
 {% endblock %}
