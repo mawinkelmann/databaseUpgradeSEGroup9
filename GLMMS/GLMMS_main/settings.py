@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'catalog.apps.CatalogConfig', #This object was created for us in /catalog/apps.py
 	'member.apps.MemberConfig',
 	'announcement.apps.AnnouncementConfig',
+    'event.apps.EventConfig',
     'crispy_forms',
 ]
 
@@ -140,7 +141,12 @@ LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/'
 
 # email to console. remove to have system send to an actual email
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_HOST = "smtp.ipage.com"
+EMAIL_HOST_USER = "notifications@spdmizzou.org"
+EMAIL_HOST_PASSWORD = "thisisapassworD1234"
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'SigPhi <notifications@spdmizzou.org>'
 
 MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
