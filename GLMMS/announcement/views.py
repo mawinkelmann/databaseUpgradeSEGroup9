@@ -7,6 +7,7 @@ from django import forms
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import send_mail
+from django.contrib import messages
 
 from .models import Announcement
 from .forms import AnnouncementForm
@@ -73,3 +74,13 @@ def announcement_edit(request, pk):
     else:
         form = AnnouncementForm(instance=announcement)
     return render(request, 'announcement/announcement_edit.html', {'form': form})
+
+@login_required
+def announcement_delete(request, pk):
+    announcement = get_object_or_404(Announcement, pk=pk)
+    if request.user == announcement.creator:
+        Announcement.objects.filter(pk=pk).delete()
+        messages.add_message(request, messages.INFO, "Announcement Deleted.")
+    else:
+        messages.add_message(request, messages.INFO, "You cannot delete an announcement you did not create.")
+    return redirect('announcement:AnnouncementsView')
