@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.core.mail import send_mail
 from django.contrib import messages
+from .filters import AnnouncementFilter
 
 from .models import Announcement
 from .forms import AnnouncementForm
@@ -24,6 +25,17 @@ def AnnouncementsView(request):
     page = request.GET.get('page')
     announcements = paginator.get_page(page)
     return render(request, 'announcement/announcement_view_all.html', {'announcements': announcements})
+
+@login_required
+def AnnouncementsViewSearch(request):
+    announc= Announcement.objects.all().order_by('-dateAdded')
+    filter = AnnouncementFilter(request.GET, queryset = announc)
+    #announcements_list = Announcement.objects.order_by('-dateAdded')
+    #paginator = Paginator(announcements_list, 6) # Show 5 announcements per page
+
+    #page = request.GET.get('page')
+    #announcements = paginator.get_page(page)
+    return render(request, 'announcement/announcement_search.html', {'filter': filter})
 
 @login_required
 def announcement_detail(request, pk):
@@ -84,3 +96,9 @@ def announcement_delete(request, pk):
     else:
         messages.add_message(request, messages.INFO, "You cannot delete an announcement you did not create.")
     return redirect('announcement:AnnouncementsView')
+
+@login_required
+def search(request):
+    announcement_list = Announcement.objects.all()
+    announcement_filter = AnnouncementFilter(request.GET, queryset=announcement_list)
+    return render(request, 'search/announcement_view_all.html', {'filter': announcement_filter})

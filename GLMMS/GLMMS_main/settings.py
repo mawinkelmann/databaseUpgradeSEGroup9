@@ -47,6 +47,7 @@ INSTALLED_APPS = [
 	'announcement.apps.AnnouncementConfig',
     'event.apps.EventConfig',
     'crispy_forms',
+    'django_filters',
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
