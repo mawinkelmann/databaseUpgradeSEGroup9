@@ -30,12 +30,7 @@ def AnnouncementsView(request):
 def AnnouncementsViewSearch(request):
     announc= Announcement.objects.all().order_by('-dateAdded')
     filter = AnnouncementFilter(request.GET, queryset = announc)
-    #announcements_list = Announcement.objects.order_by('-dateAdded')
-    #paginator = Paginator(announcements_list, 6) # Show 5 announcements per page
-
-    #page = request.GET.get('page')
-    #announcements = paginator.get_page(page)
-    return render(request, 'announcement/announcement_search.html', {'filter': filter})
+    return render(request, 'announcement/announcement_search.html', {'filter':filter})
 
 @login_required
 def announcement_detail(request, pk):
