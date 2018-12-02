@@ -9,7 +9,7 @@
 }
 
 .list-group-flush .list-group-item:first-child {
-  border-top: 0; 
+  border-top: 0;
 }
 
 .list-group-item {
@@ -31,5 +31,5 @@ body {
 }
 
 p.errorMessage {
-  color: #dc3545
+  color: #dc3545;
 }

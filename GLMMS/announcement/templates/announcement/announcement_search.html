@@ -19,7 +19,7 @@
 <a class="btn btn-danger" href="{% url 'announcement:announcement_new' %}">Create New</a>
 
 <form method="get">
-    {{ filter.form }}
+    {{ filter.form }} <!--form rendering options to change them i.e. filter.form.as_table is a table-->
     <button type="submit">Search</button>
 </form>
 
