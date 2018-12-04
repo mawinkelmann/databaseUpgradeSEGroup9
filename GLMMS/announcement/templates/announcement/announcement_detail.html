@@ -55,4 +55,17 @@
 
 
     </div>
+
+    <hr>
+    <a class="btn btn-default" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
+  {% for comment in announcement.comments.all %}
+      <div class="comment">
+          <div class="date">{{ comment.created_date }}</div>
+          <strong>{{ comment.author }}</strong>
+          <p>{{ comment.text|linebreaks }}</p>
+          <hr>
+      </div>
+  {% empty %}
+      <p>No comments here yet :(</p>
+  {% endfor %}
 {% endblock %}

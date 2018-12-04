@@ -11,7 +11,7 @@ from django.contrib import messages
 from .filters import AnnouncementFilter
 
 from .models import Announcement
-from .forms import AnnouncementForm
+from .forms import AnnouncementForm, CommentForm
 from member.models import Profile
 from django.contrib.auth.models import User
 
@@ -97,3 +97,18 @@ def search(request):
     announcement_list = Announcement.objects.all()
     announcement_filter = AnnouncementFilter(request.GET, queryset=announcement_list)
     return render(request, 'search/announcement_view_all.html', {'filter': announcement_filter})
+
+@login_required
+def add_comment_to_announcement(request, pk):
+    announcement = get_object_or_404(Announcement, pk=pk)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.author = request.user
+            comment.post = announcement
+            comment.save()
+            return redirect('announcement:announcement_detail', pk=announcement.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'announcement/add_comment_to_announcement.html', {'form': form})
