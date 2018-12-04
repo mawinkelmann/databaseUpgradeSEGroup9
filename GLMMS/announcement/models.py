@@ -28,9 +28,10 @@ class Announcement(models.Model):
 
 class Comment(models.Model):
     post = models.ForeignKey('announcement.Announcement', on_delete=models.CASCADE, related_name='comments')
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='comments')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     text = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
+	#change approved to false to enable admin authorization to show comment
     approved_comment = models.BooleanField(default=True)
 
     def approve(self):
