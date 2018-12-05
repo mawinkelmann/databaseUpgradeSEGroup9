@@ -57,7 +57,7 @@
     </div>
 
     <hr>
-    <a class="btn btn-default" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
+    <a class="btn btn-dark" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
   {% for comment in announcement.comments.all %}
       <div class="comment">
           <div class="date">{{ comment.created_date }}</div>
