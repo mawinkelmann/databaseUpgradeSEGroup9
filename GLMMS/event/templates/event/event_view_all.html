@@ -14,6 +14,7 @@
 {% load sorter %}
 
 <h1>Events</h1>
+<hr>
 <a class="btn btn-danger" href="{% url 'event:event_new' %}">Create New</a>
 
 <div class="row">
@@ -21,10 +22,7 @@
     <div class="col-sm-12 col-lg-6">
       <div class="card" style="margin-bottom: .25rem; margin-top: .25rem">
         {% if events.is_public == True %}
-        <h5 class="card-header">★ {{ events.title }} ★</h5>
-        {% else %}
         <h5 class="card-header">{{ events.title }}</h5>
-        {% endif %}
         <div class="card-body">
           <h5 class="card-title">
             {% if events.topic == 'A' %}
@@ -49,6 +47,33 @@
           <p class="card-text">Ends: {{ events.end_time }}</p>
           <a href="{% url 'event:event_detail' pk=events.pk %}" class="btn btn-danger">Details</a>
         </div>
+        {% else %}
+        <h5 class="card-header" style="background: #808080; color: white">{{ events.title }}</h5>
+        <div class="card-body" style="background: #A9A9A9; color: white">
+          <h5 class="card-title">
+            {% if events.topic == 'A' %}
+            General Event
+            {% elif events.topic == 'B' %}
+            Social Event
+            {% elif events.topic == 'C' %}
+            Professional Event
+            {% elif events.topic == 'D' %}
+            Philanthropy Event
+            {% elif events.topic == 'E' %}
+            Recruitment Event
+            {% elif events.topic == 'F' %}
+            Social Event
+            {% elif events.topic == 'G' %}
+            Brotherhood Development Event
+            {% else %}
+            New Member Event
+            {% endif %}
+          </h5>
+          <p class="card-text">Starts: {{ events.start_time }}</p>
+          <p class="card-text">Ends: {{ events.end_time }}</p>
+          <a href="{% url 'event:event_detail' pk=events.pk %}" class="btn btn-danger">Details</a>
+        </div>
+        {% endif %}
       </div>
     </div>
     {% endfor %}

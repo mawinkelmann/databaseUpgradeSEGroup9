@@ -43,7 +43,7 @@
 
           <p>Message: {{ announcement.message|linebreaksbr }}</p>
 
-          <a class="btn btn-primary" href="{% url 'announcement:AnnouncementsView' %}">Back</a>
+          <a class="btn btn-dark" href="{% url 'announcement:AnnouncementsView' %}">Back</a>
           <!-- if to check if the user that created the announcement is the one viewing it and allowing them to edit the post.
                request.user is comparing a User model to announcement.creator (which is also a User model) -->
           {% if request.user == announcement.creator %}
@@ -55,11 +55,12 @@
 
 
     </div>
-
     <hr>
-    <a class="btn btn-default" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
-  {% for comment in announcement.comments.all %}
-      <div class="comment">
+    <div class="card">
+      <h5 class="card-header">Comments</h5>
+      <div class="card-body">
+        {% for comment in announcement.comments.all %}
+        <div class="card-text comment">
           <div class="date">{{ comment.created_date }}</div>
           <strong>{{ comment.author }}</strong>
           <p>{{ comment.text|linebreaks }}</p>
@@ -69,8 +70,12 @@
           {% endif %}
 
           <hr>
+        </div>
+        {% empty %}
+        <p>No comments here yet :(</p>
+        {% endfor %}
+        <a class="btn btn-danger" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
       </div>
-  {% empty %}
-      <p>No comments here yet :(</p>
-  {% endfor %}
+    </div>
+    
 {% endblock %}
