@@ -18,6 +18,7 @@ from datetime import datetime
 
 @login_required
 def events_view(request):
+    '''View to handle the diaplyo f all events happening in the future '''
     today = datetime.now().date()
     events_list = Event.objects.filter(start_time__gte=today).order_by('start_time')
     paginator = Paginator(events_list, 6) # Show 5 events per page
@@ -28,6 +29,7 @@ def events_view(request):
 
 @login_required
 def past_events_view(request):
+    '''View to handle the displaying of past events'''
     today = datetime.now().date()
     events_list = Event.objects.filter(start_time__lt=today).order_by('start_time')
     paginator = Paginator(events_list, 6) # Show 5 events per page
@@ -38,6 +40,7 @@ def past_events_view(request):
 
 @login_required
 def event_detail(request, pk):
+    '''View to show the full details of an event'''
     event = get_object_or_404(Event, pk=pk)
     rsvps = Event_RSVPs.objects.filter(event=event).order_by('member__username')
     num_rsvps = rsvps.count()
@@ -46,6 +49,7 @@ def event_detail(request, pk):
 
 @login_required
 def event_new(request):
+    '''View to handle to the creation of a new event'''
     if request.method == "POST":
         form = EventForm(request.POST)
         if form.is_valid():
@@ -60,6 +64,7 @@ def event_new(request):
 
 @login_required
 def event_edit(request, pk):
+    '''View to handle the editting of an event'''
     event = get_object_or_404(Event, pk=pk)
     if request.method == "POST":
         form = EventForm(request.POST, instance=event)
@@ -75,6 +80,7 @@ def event_edit(request, pk):
 
 @login_required
 def event_rsvp(request, pk):
+    '''View that lets a user rsvp to an event once'''
     event = get_object_or_404(Event, pk=pk)
     if Event_RSVPs.objects.filter(event=event, member=request.user).count() == 0:
         Event_RSVPs.objects.create(event=event, member=request.user)
@@ -85,6 +91,7 @@ def event_rsvp(request, pk):
 
 @login_required
 def event_delete(request, pk):
+    '''View that allows the creator of an event to delete it'''
     event = get_object_or_404(Event, pk=pk)
     if request.user == event.creator:
         Event.objects.filter(pk=pk).delete()
@@ -95,6 +102,7 @@ def event_delete(request, pk):
 
 @login_required
 def event_notify(request, pk):
+    '''View that lets the user send a message to users that have rsvped to their event'''
     event = get_object_or_404(Event, pk=pk)
     if request.method == "POST":
         if request.user == event.creator:
@@ -107,8 +115,10 @@ def event_notify(request, pk):
 
                 recipients = []
                 for rsvp in Event_RSVPs.objects.filter(event=event):
+                    #send an email
                     if form.cleaned_data['type'] is False:
-                        recipients.append(rsvp.member.email)                            
+                        recipients.append(rsvp.member.email)  
+                    #send a text                          
                     elif form.cleaned_data['type'] is True:
                         recipients.append(rsvp.member.profile.phone + "@" + rsvp.member.profile.cell_carrier_id.sms_address)
                 email = EmailMessage(subject, message, sender, recipients, reply_to=reply_to)
