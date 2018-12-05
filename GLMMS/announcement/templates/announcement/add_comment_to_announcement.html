@@ -4,8 +4,7 @@
     <h1>New comment</h1>
     <form method="POST" class="post-form">{% csrf_token %}
         {{ form.as_p }}
-
-        <a class="btn btn-dark" href="{% url 'announcement:AnnouncementsView' %}">Back</a>
+        <a class="btn btn-primary" href="{% url 'announcement:AnnouncementsView' %}">Back</a>
         <button type="submit" class="save btn btn-default">Send</button>
     </form>
 {% endblock %}
