@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from django.contrib import messages
 from .filters import AnnouncementFilter
 
-from .models import Announcement
+from .models import Announcement, Comment
 from .forms import AnnouncementForm, CommentForm
 from member.models import Profile
 from django.contrib.auth.models import User
@@ -112,3 +112,13 @@ def add_comment_to_announcement(request, pk):
     else:
         form = CommentForm()
     return render(request, 'announcement/add_comment_to_announcement.html', {'form': form})
+
+@login_required
+def comment_delete(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    if request.user == comment.author:
+        Comment.objects.filter(pk=pk).delete()
+        messages.add_message(request, messages.INFO, "Comment Deleted.")
+    else:
+        messages.add_message(request, messages.INFO, "You cannot delete a comment you did not create.")
+    return redirect('announcement:announcement_detail', pk=comment.post.pk)

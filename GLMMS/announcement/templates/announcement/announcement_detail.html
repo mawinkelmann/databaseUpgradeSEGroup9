@@ -63,6 +63,11 @@
           <div class="date">{{ comment.created_date }}</div>
           <strong>{{ comment.author }}</strong>
           <p>{{ comment.text|linebreaks }}</p>
+
+          {% if request.user == comment.author %}
+          <a class="btn btn-danger" href="{% url 'announcement:comment_delete' pk=comment.pk %}">Delete</a>
+          {% endif %}
+
           <hr>
       </div>
   {% empty %}

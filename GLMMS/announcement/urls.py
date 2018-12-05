@@ -11,6 +11,7 @@ urlpatterns = [
     path('announcement/new', views.announcement_new, name='announcement_new'),
     path('announcement/<int:pk>/edit/', views.announcement_edit, name='announcement_edit'),
     path('announcement/<int:pk>/delete/', views.announcement_delete, name='announcement_delete'),
+    path('announcement/<int:pk>/deleteComment/', views.comment_delete, name='comment_delete'),
     url(r'^search/$', views.search, name='search'),
     url(r'^post/(?P<pk>\d+)/comment/$', views.add_comment_to_announcement, name='add_comment_to_announcement'),
 ]
