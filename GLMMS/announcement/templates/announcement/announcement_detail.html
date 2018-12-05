@@ -14,7 +14,7 @@
       <h2 class="card-header">{{ announcement.title }}</h2>
       <div class="card-body">
         <h5 class="class-title">
-          Creator: {{ announcement.creator }} on {{ announcement.dateAdded }}
+          Creator: {{ announcement.creator.first_name }} {{ announcement.creator.last_name }} on {{ announcement.dateAdded }}
         </h5>
         <div class="class-text">
           <!-- if to convert internal topic codes to readable format -->
