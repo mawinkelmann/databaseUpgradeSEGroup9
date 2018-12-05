@@ -149,5 +149,5 @@ EMAIL_HOST_PASSWORD = "thisisapassworD1234"
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'SigPhi <notifications@spdmizzou.org>'
 
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
