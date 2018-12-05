@@ -12,16 +12,29 @@ from django.core.mail import send_mail, EmailMessage
 from .models import Event, Event_RSVPs
 from .forms import EventForm, NotificationForm
 
+from datetime import datetime
+
 # Create your views here.
 
 @login_required
-def EventsView(request):
-    events_list = Event.objects.order_by('start_time')
+def events_view(request):
+    today = datetime.now().date()
+    events_list = Event.objects.filter(start_time__gte=today).order_by('start_time')
     paginator = Paginator(events_list, 6) # Show 5 events per page
 
     page = request.GET.get('page')
     events = paginator.get_page(page)
-    return render(request, 'event/event_view_all.html', {'events': events})
+    return render(request, 'event/event_view_all.html', {'events': events, 'is_past': False})
+
+@login_required
+def past_events_view(request):
+    today = datetime.now().date()
+    events_list = Event.objects.filter(start_time__lt=today).order_by('start_time')
+    paginator = Paginator(events_list, 6) # Show 5 events per page
+
+    page = request.GET.get('page')
+    events = paginator.get_page(page)
+    return render(request, 'event/event_view_all.html', {'events': events, 'is_past': True})
 
 @login_required
 def event_detail(request, pk):
@@ -58,7 +71,7 @@ def event_edit(request, pk):
             return redirect('event:event_detail', pk=event.pk)
     else:
         form = EventForm(instance=event)
-    return render(request, 'event/event_edit.html', {'form': form})
+    return render(request, 'event/event_edit.html', {'event': event, 'form': form})
 
 @login_required
 def event_rsvp(request, pk):
@@ -78,7 +91,7 @@ def event_delete(request, pk):
         messages.add_message(request, messages.INFO, "Event Deleted.")
     else: 
         messages.add_message(request, messages.INFO, "You cannot delete an event you did not create.")
-    return redirect('event:EventsView')
+    return redirect('event:events_view')
 
 @login_required
 def event_notify(request, pk):

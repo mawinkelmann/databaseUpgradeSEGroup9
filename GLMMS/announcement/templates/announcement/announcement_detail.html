@@ -61,7 +61,7 @@
   {% for comment in announcement.comments.all %}
       <div class="comment">
           <div class="date">{{ comment.created_date }}</div>
-          <strong>{{ comment.author }}</strong>
+          <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
           <p>{{ comment.text|linebreaks }}</p>
 
           {% if request.user == comment.author %}

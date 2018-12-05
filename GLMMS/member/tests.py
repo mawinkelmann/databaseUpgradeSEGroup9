@@ -37,7 +37,7 @@ class ProfileDetailViewTests(TestCase):
         cls.user.profile.member_status = Profile.ACTIVE
         cls.user.profile.pledge_class = 'Beta Omicron'
         cls.user.save()
-        print("{} -- {}".format(cls.user.id, cls.user.profile.id))
+        #print("{} -- {}".format(cls.user.id, cls.user.profile.id))
 
     def test_no_profile(self):
         """
@@ -70,7 +70,7 @@ class ProfileEditViewTests(TestCase):
         cls.user.profile.member_status = Profile.ACTIVE
         cls.user.profile.pledge_class = 'Beta Omicron'
         cls.user.save()
-        print("{} -- {}".format(cls.user.id, cls.user.profile.id))
+        #print("{} -- {}".format(cls.user.id, cls.user.profile.id))
 
     def test_no_profile_to_edit(self):
         """
@@ -114,16 +114,16 @@ class SingleSearchViewTests(TestCase):
         cls.user.profile.member_status = Profile.ACTIVE
         cls.user.profile.pledge_class = 'Beta Omicron'
         cls.user.save()
-        print("{} -- {}".format(cls.user.id, cls.user.profile.id))
+        #print("{} -- {}".format(cls.user.id, cls.user.profile.id))
 
     def test_display_search(self):
         """
         The search display should show the one user as an option 
         """
         self.client.force_login(self.user)
-        print(User.objects.get(pk=1).profile)
+        #print(User.objects.get(pk=1).profile)
         response = self.client.get(reverse('member:single_search'))
-        print(response.content)
+        #print(response.content)
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, '{}: {} {}'.format(USERNAME_TEST, FIRST_TEST, LAST_TEST))
 
@@ -131,7 +131,7 @@ class SingleSearchViewTests(TestCase):
         """
         The result of the post request should include the info about the requested user
         """
-        print(User.objects.get(pk=1).profile)
+        #print(User.objects.get(pk=1).profile)
         self.client.force_login(self.user)
         #response = self.client.get(reverse('member:single_search'))
         #print(response.content)
@@ -141,7 +141,7 @@ class SingleSearchViewTests(TestCase):
         self.assertContains(response, BIO_TEST)
 
     def test_single_search_form(self):
-        print(User.objects.get(pk=1).profile)
+        #print(User.objects.get(pk=1).profile)
         from .views import SingleSearchForm
         form_data = {'actives_choice': str(self.user.profile.id), 'inactives_choice': '', 'newmembers_choice': '', 'alumni_choice': ''}
         form = SingleSearchForm(data=form_data)
@@ -156,7 +156,7 @@ class MultiMemberViewTests(TestCase):
         cls.user.profile.member_status = Profile.ACTIVE
         cls.user.profile.pledge_class = 'Beta Omicron'
         cls.user.save()
-        print("{} -- {}".format(cls.user.id, cls.user.profile.id))
+        #print("{} -- {}".format(cls.user.id, cls.user.profile.id))
 
     def test_display_multi_search(self):
         """
@@ -206,7 +206,7 @@ class ProfileModelTests(TestCase):
         cls.user.profile.member_status = Profile.ACTIVE
         cls.user.profile.pledge_class = 'Beta Omicron'
         cls.user.save()
-        print("{} -- {}".format(cls.user.id, cls.user.profile.id))
+        #print("{} -- {}".format(cls.user.id, cls.user.profile.id))
 
     def test_get_printable_fields(self):
         """
