@@ -51,14 +51,15 @@
           </p>
           <p>Location: {{ event.address }}, {{ event.city }}, {{ event.state }} {{ event.zipcode }}</p>
           <p>Created by {{ event.creator }} on {{ event.dateAdded }}</p>
-            <a class="btn btn-primary" href="{% url 'event:events_view' %}">Back</a>
+            <a class="btn btn-dark" href="{% url 'event:EventsView' %}">Back</a>
+            <a class="btn btn-danger" href="{% url 'event:event_rsvp' pk=event.pk %}">RSVP to Event</a>
+            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRSVP"  {% if num_rsvps == 0 %} disabled {% endif %}>Show RSVPs</button>
           {% if request.user == event.creator %}
+            <br><br>
             <a class="btn btn-danger" href="{% url 'event:event_edit' pk=event.pk %}">Edit</a>
             <a class="btn btn-danger" href="{% url 'event:event_delete' pk=event.pk %}">Delete</a>
             <a class="btn btn-danger" data-toggle="collapse" href="#collapseNotify" role="button">Notify RSVPs</a>
           {% endif %}
-            <a class="btn btn-danger" href="{% url 'event:event_rsvp' pk=event.pk %}">RSVP to Event</a>
-            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRSVP"  {% if num_rsvps == 0 %} disabled {% endif %}>Show RSVPs</button>
           </div>
       </div>
       <div class="collapse" id="collapseNotify">
