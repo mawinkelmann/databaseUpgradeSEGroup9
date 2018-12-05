@@ -41,6 +41,11 @@
                 {{ form.is_public|as_crispy_field }}
             </div>
         </div>
-        <button class="btn btn-danger" type="submit">Save</button>
+        <button class="btn btn-primary" type="submit">Save</button>
+        {% if event %}
+            <a href="{% url 'event:event_detail' pk=event.pk %}" class="btn btn-danger">Cancel</a>
+        {% else %}
+            <a href="{% url 'event:events_view' %}" class="btn btn-danger">Cancel</a>
+        {% endif %}
     </form>
 {% endblock %}

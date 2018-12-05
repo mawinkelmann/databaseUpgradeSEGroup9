@@ -47,7 +47,6 @@ INSTALLED_APPS = [
 	'announcement.apps.AnnouncementConfig',
     'event.apps.EventConfig',
     'crispy_forms',
-    'django_filters', 
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
@@ -149,5 +148,5 @@ EMAIL_HOST_PASSWORD = "thisisapassworD1234"
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = 'SigPhi <notifications@spdmizzou.org>'
 
-MEDIA_ROOT  = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
