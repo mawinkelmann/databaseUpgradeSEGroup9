@@ -18,7 +18,7 @@
 <a class="btn btn-danger" href="{% url 'event:event_new' %}">Create New</a>
 {% if is_past %}
     <a href="{% url 'event:events_view' %}">View Current Events</a>
-{% else %}
+{% else %} 
     <a href="{% url 'event:past_events' %}">View Past Events</a>
 {% endif %}
 <div class="row">
