@@ -5,7 +5,7 @@ from .models import Event
 
 class SplitDateTimeWidget(forms.SplitDateTimeWidget):
     """
-    A SplitDateTime Widget that has some
+    A SplitDateTime Widget
     """
     template_name = 'admin/widgets/split_datetime.html'
 
@@ -42,6 +42,7 @@ class EventForm(forms.ModelForm):
         }
 
 class NotificationForm(forms.Form):
+    '''Form to create a notification'''
     subject = forms.CharField(label='Message Subject', max_length=127)
     message = forms.CharField(widget=forms.Textarea)
     #sender = forms.EmailField()
