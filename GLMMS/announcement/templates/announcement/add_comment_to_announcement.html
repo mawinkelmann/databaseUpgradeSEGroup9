@@ -1,12 +1,18 @@
 {% extends 'common/base.html' %}
+{% load crispy_forms_tags %}
 
 {% block content %}
-    <h1>New comment</h1>
+    <h1>New Comment</h1>
+    <hr>
     <form method="POST" class="post-form">
         {% csrf_token %}
-        {{ form.as_p }}
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                {{ form.text|as_crispy_field }}
+            </div>
+        </div>
 
         <a class="btn btn-dark" href="{% url 'announcement:AnnouncementsView' %}">Back</a>
-        <button type="submit" class="save btn btn-default">Send</button>
+        <button type="submit" class="save btn btn-danger">Send</button>
     </form>
 {% endblock %}
