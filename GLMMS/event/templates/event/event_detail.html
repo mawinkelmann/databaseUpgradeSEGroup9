@@ -59,8 +59,6 @@
             <a class="btn btn-danger" href="{% url 'event:event_delete' pk=event.pk %}">Delete</a>
             <a class="btn btn-danger" data-toggle="collapse" href="#collapseNotify" role="button">Notify RSVPs</a>
           {% endif %}
-            <a class="btn btn-danger" href="{% url 'event:event_rsvp' pk=event.pk %}">RSVP to Event</a>
-            <button class="btn btn-danger" type="button" data-toggle="collapse" data-target="#collapseRSVP"  {% if num_rsvps == 0 %} disabled {% endif %}>Show RSVPs</button>
           </div>
       </div>
       <div class="collapse" id="collapseNotify">
