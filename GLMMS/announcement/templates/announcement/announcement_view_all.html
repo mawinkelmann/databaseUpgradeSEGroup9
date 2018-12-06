@@ -15,6 +15,7 @@
 
 
 <h1>Announcements</h1>
+<hr>
 <a class="btn btn-danger" href="{% url 'announcement:announcement_new' %}">Create New</a>
 <a class="btn btn-danger" href="{% url 'announcement:AnnouncementsViewSearch' %}">Search</a>
 
@@ -23,16 +24,29 @@
     <div class="col-sm-12 col-lg-6">
       <div class="card" style="margin-bottom: .25rem; margin-top: .25rem">
         {% if announcements.type == 'H' %}
-        <h5 class="card-header">★ {{ announcements.title }} ★</h5>
+        <h5 class="card-header" style="background: #808080; color: white">{{ announcements.title }}</h5>
+        <div class="card-body" style="background: #A9A9A9; color: white">
+          <h5 class="card-title" >{{ announcements.creator }}</h5>
+          <p class="card-text">
+            {{ announcements.dateAdded }}
+            <br>
+            Comments: {{ announcements.comments.count }}
+          </p>
+          <a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}" class="btn btn-danger">Details</a>
+        </div>
         {% else %}
         <h5 class="card-header">{{ announcements.title }}</h5>
-        {% endif %}
         <div class="card-body">
-          <h5 class="card-title">{{ announcements.creator.first_name }} {{ announcements.creator.last_name }}</h5>
-          <p class="card-text">{{ announcements.dateAdded }}</p>
+          <h5 class="card-title">{{ announcements.creator }}</h5>
+          <p class="card-text">
+            {{ announcements.dateAdded }}
+            <br>
+            Comments: {{ announcements.comments.count }}
+          </p>
           <a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}" class="btn btn-danger">Details</a>
-          <a>Comments: {{ announcements.comments.count }}</a>
         </div>
+        {% endif %}
+          
       </div>
     </div>
     {% endfor %}

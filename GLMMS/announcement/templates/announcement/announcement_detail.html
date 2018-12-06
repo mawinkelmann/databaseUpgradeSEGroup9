@@ -14,7 +14,7 @@
       <h2 class="card-header">{{ announcement.title }}</h2>
       <div class="card-body">
         <h5 class="class-title">
-          Creator: {{ announcement.creator.first_name }} {{ announcement.creator.last_name }} on {{ announcement.dateAdded }}
+          Creator: {{ announcement.creator }} on {{ announcement.dateAdded }}
         </h5>
         <div class="class-text">
           <!-- if to convert internal topic codes to readable format -->
@@ -55,22 +55,22 @@
 
 
     </div>
-
     <hr>
-    <a class="btn btn-danger" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
-  {% for comment in announcement.comments.all %}
-      <div class="comment">
+    <div class="card">
+      <h5 class="card-header">Comments</h5>
+      <div class="card-body">
+        {% for comment in announcement.comments.all %}
+        <div class="card-text comment">
           <div class="date">{{ comment.created_date }}</div>
-          <strong>{{ comment.author.first_name }} {{ comment.author.last_name }}</strong>
+          <strong>{{ comment.author }}</strong>
           <p>{{ comment.text|linebreaks }}</p>
-
-          {% if request.user == comment.author %}
-          <a class="btn btn-danger" href="{% url 'announcement:comment_delete' pk=comment.pk %}">Delete</a>
-          {% endif %}
-
           <hr>
+        </div>
+        {% empty %}
+        <p>No comments here yet :(</p>
+        {% endfor %}
+        <a class="btn btn-danger" href="{% url 'announcement:add_comment_to_announcement' pk=announcement.pk %}">Add comment</a>
       </div>
-  {% empty %}
-      <p>No comments here yet :(</p>
-  {% endfor %}
+    </div>
+    
 {% endblock %}

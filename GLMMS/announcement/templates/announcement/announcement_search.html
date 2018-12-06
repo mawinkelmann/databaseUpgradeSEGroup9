@@ -33,7 +33,7 @@
         <h5 class="card-header">{{ announcements.title }}</h5>
         {% endif %}
         <div class="card-body">
-          <h5 class="card-title">{{ announcements.creator.first_name }} {{ announcements.creator.last_name }}</h5>
+          <h5 class="card-title">{{ announcements.creator }}</h5>
           <p class="card-text">{{ announcements.dateAdded }}</p>
           <a href="{% url 'announcement:announcement_detail' pk=announcements.pk %}" class="btn btn-danger">Details</a>
         </div>
