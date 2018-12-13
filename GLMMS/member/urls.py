@@ -1,3 +1,5 @@
+#Author: Christopher Whetsel
+
 '''this file defines the mapping of urls to view functions. see views.py for the view definitions.'''
 from django.urls import path
 from django.contrib.auth.decorators import login_required

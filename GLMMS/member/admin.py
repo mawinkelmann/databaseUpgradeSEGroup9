@@ -1,3 +1,5 @@
+#Author: Christopher Whetsel
+
 '''This file is needed to tell the admin page what models to display as edittable'''
 from django.contrib import admin
 import member.models as mem

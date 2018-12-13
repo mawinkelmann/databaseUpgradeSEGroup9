@@ -1,3 +1,5 @@
+#Author: Christopher Whetsel
+
 '''this file defines the models of the member application'''
 import datetime
 

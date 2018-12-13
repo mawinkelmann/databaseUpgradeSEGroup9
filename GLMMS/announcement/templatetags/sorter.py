@@ -1,3 +1,7 @@
+# Author: Jason Pulis
+
+
+
 from urllib.parse import urlencode
 from collections import OrderedDict
 from django import template

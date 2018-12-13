@@ -1,3 +1,5 @@
+#Author: Jason Pulis
+
 from django.apps import AppConfig
 
 

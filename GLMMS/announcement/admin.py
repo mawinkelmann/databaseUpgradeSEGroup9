@@ -1,3 +1,5 @@
+#Author: Christopher Whetsel
+
 from django.contrib import admin
 
 from announcement.models import Announcement, Comment

@@ -1,4 +1,8 @@
-'''this class is only being used to serve the project index page'''
+'''this class is only being used to serve the project index page
+Author: Christopher Whetsel
+
+'''
+
 from django.shortcuts import render
 
 def index(request):

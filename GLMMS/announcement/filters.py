@@ -1,3 +1,5 @@
+#Author: Jason Pulis
+
 import django_filters
 
 from announcement.models import Announcement

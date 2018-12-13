@@ -1,3 +1,5 @@
+#Author: Christopher Whetsel
+
 from django.apps import AppConfig
 
 
